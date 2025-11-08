@@ -10,7 +10,7 @@ function About() {
         <h1 className="text-3xl font-bold mb-5">About</h1>
         <section>
     <p>
-      Hello! I’m Ashish, a passionate and dedicated B.Tech student specializing in Full Stack Development. 
+      Hello! I’m Ashish, a passionate and dedicated Condidate  specializing in Full Stack Development. 
       I’m currently honing my skills in Java, SQL, HTML, CSS, JavaScript, React.js, Spring, Spring Boot, 
       and the MERN stack. I aim to build scalable, robust applications and grow as a proficient developer.
     </p>
@@ -25,7 +25,7 @@ function About() {
         <strong>Bachelor of Technology in Computer Science</strong><br></br>
         Bansal Institute of Research and Technology, Bhopal<br></br>
         Affiliated to Rajiv Gandhi Proudyogiki Vishwavidyalaya (RGPV)<br></br>
-        October 2021 – May 2025 (Expected)
+        October 2021 – May 2025 (Completed)
       </li>
       <li>
         <strong>High School</strong><br></br>
@@ -43,11 +43,12 @@ function About() {
         <h1 className="text-green-600 font-semibold text-xl">
         Skills & Expertise</h1>
     <ul>
-      <li><strong>Programming Languages:</strong> Java, JavaScript</li>
-      <li><strong>Frontend Development:</strong> HTML, CSS, JavaScript, React.js</li>
-      <li><strong>Backend Development:</strong> Node.js, Express.js, Spring Boot</li>
-      <li><strong>Database Management:</strong> SQL, MongoDB</li>
-      <li><strong>Tools:</strong> Git, GitHub, Postman</li>
+      <li><strong>Programming Languages:</strong> Java, JavaScript,SQL,C</li>
+      <li><strong>Frontend Development:</strong> HTML, CSS, JavaScript, React.js,BootStrap,TailWind</li>
+      <li><strong>Backend Development:</strong> Node.js, Spring Boot,Hibernate,JDBC,</li>
+      <li><strong>Database Management:</strong> MySQL,MsSQL, MongoDB</li>
+      <li><strong>Tools:</strong> Git, GitHub, Postman,</li>
+      <li><strong>Concepts:</strong> Dsa,Oops,JWT Auth,Web Security,</li>
     </ul>
   </section>
         </span>
@@ -62,13 +63,13 @@ function About() {
     <ul>
       <li>
         <strong>Java Full Stack Development Training</strong><br></br>
-        October 2023 – Present<br></br>
+        October 2023 – Jun 2025<br></br>
         - Learning Java, Spring Boot, and web technologies.<br></br>
         - Building projects with robust backend services and dynamic frontend designs.
       </li>
       <li>
         <strong>MERN Stack Development Practice</strong><br></br>
-        November 2023 – Present<br></br>
+        November 2023 - June 2024<br></br>
         - Developing end-to-end applications using MongoDB, Express.js, React.js, and Node.js.<br></br>
         - Creating responsive user interfaces and scalable APIs.
       </li>
@@ -97,7 +98,7 @@ function About() {
         </h1>
         <p>
           My mission is to leverage my skills and creativity to deliver
-          innovative [Your Field] solutions that exceed client expectations and
+          innovative Software devlopment solutions that exceed client expectations and
           contribute positively to the digital landscape. I am committed to
           continuous learning and growth, always seeking new challenges and
           opportunities to expand my horizons.
