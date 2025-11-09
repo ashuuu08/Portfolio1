@@ -28,7 +28,7 @@ function PortFolio() {
       logo: reactjs,
       name: "Virtual Assistant",
       dis: "Virtual Assistant using HTML CSS and JavaScript",
-       link:"",
+       link:"https://todomy08.netlify.app",
         sorce:"https://github.com/ashuuu08/Virtual_Assistant",
     },
     {
