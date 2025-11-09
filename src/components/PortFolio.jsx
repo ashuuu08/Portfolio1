@@ -3,7 +3,7 @@ import java from "../../public/project/Weater.png";
 import python from "../../public/python.webp";
 import mongoDB from "../../public/project/TODO.png";
 import express from "../../public/project/univercity.png";
-import reactjs from "../../public/project/eoon.png";
+import reactjs from "../../public/project/Eoon.png";
 import nodejs from "../../public/project/SopeEase.png";
 function PortFolio() {
   const cardItem = [
