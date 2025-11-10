@@ -40,7 +40,7 @@ function Home() {
             </div>
             <br />
             <p className="text-sm md:text-md text-justify">
-            Hello! I’m Ashish, a passionate and driven B.Tech student specializing in Full Stack Development.
+            Hello! I’m Ashish, a passionate and driven B.Tech Graduate specializing in Full Stack Development.
            I am currently enhancing my skills in Java technologies like Core Java, JDBC, Spring, and Spring Boot, 
            as well as mastering the MERN stack (MongoDB, Express.js, React.js, and Node.js).
             </p>
