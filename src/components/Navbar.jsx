@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import pic from "../../public/project/code.png";
+import pic from "../assets/code.png";
+import resume from "../assets/ashish2.22.pdf";
+
 import { AiOutlineMenu } from "react-icons/ai";
 import { IoCloseSharp } from "react-icons/io5";
 import { Link } from "react-scroll";
@@ -49,8 +51,8 @@ function Navbar() {
 
             {/* Resume Button */}
             <a
-              href="public/project/ashish2.22.pdf"
-              download="public/project/ashish2.22.pdf"
+              href={resume}
+              download={resume}
               className="px-4 py-2 border border-[#ffa500] text-[#ffa500] rounded-md 
               hover:bg-[#ffa500] hover:text-black transition-all duration-300 font-semibold shadow-[0_0_10px_#ffa500aa] hover:shadow-[0_0_25px_#ffa500]"
             >
