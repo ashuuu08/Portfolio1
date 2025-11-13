@@ -1,33 +1,51 @@
 import React from "react";
 import {
-  FaFacebook,
+  FaFacebookF,
   FaTwitter,
   FaInstagram,
   FaLinkedinIn,
-} from "react-icons/fa6";
+  FaGithub,
+} from "react-icons/fa";
+
 function Footer() {
   return (
-    <>
-      <hr />
-      <footer className="py-12">
-        <div className="max-w-screen-2xl container mx-auto px-4 md:px-20">
-          <div className=" flex flex-col items-center justify-center">
-            <div className="flex space-x-4">
-              <FaFacebook  size={24} />
-              <FaTwitter size={24} />
-              <FaInstagram size={24} />
-              <FaLinkedinIn size={24} />
-            </div>
-            <div className="mt-8 border-t border-gray-700 pt-8 flex flex-col items-center">
-              <p className="text-sm">
-                &copy; 2024 Your Company. All rights reserved.
-              </p>
-              <p className="text-sm">devloped by Ashish </p>
-            </div>
-          </div>
+    <footer className="bg-gradient-to-r from-[#3b82f6] to-[#000000] text-gray-100 py-10 px-6 border-t border-gray-700">
+      <div className="max-w-screen-xl mx-auto flex flex-col items-center justify-center text-center space-y-6">
+        {/* Social Links */}
+        <div className="flex space-x-6">
+          {[
+            { Icon: FaFacebookF, link: "#" },
+            { Icon: FaTwitter, link: "#" },
+            { Icon: FaInstagram, link: "#" },
+            { Icon: FaLinkedinIn, link: "#" },
+            { Icon: FaGithub, link: "#" },
+          ].map(({ Icon, link }, index) => (
+            <a
+              key={index}
+              href={link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-3 rounded-full bg-[] hover:bg-[#3b82f6] transition-all duration-300 transform hover:-translate-y-1 hover:scale-110"
+            >
+              <Icon size={20} />
+            </a>
+          ))}
         </div>
-      </footer>
-    </>
+
+        {/* Divider */}
+        <div className="w-20 border-t border-gray-300"></div>
+
+        {/* Text Section */}
+        <div>
+          <p className="text-sm text-gray-100 tracking-wide">
+            &copy; {new Date().getFullYear()} <span className="text-[#ffa500] font-semibold">Ashish Kumar Rathour</span>. All rights reserved.
+          </p>
+          <p className="text-xs text-gray-200 mt-1">
+            Designed & Developed with 💻 and ❤️ by Ashish
+          </p>
+        </div>
+      </div>
+    </footer>
   );
 }
 
