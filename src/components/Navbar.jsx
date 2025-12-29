@@ -68,7 +68,7 @@ function Navbar() {
 
         {/* Mobile Navbar */}
         {menu && (
-          <div className="md:hidden bg-[#ff7f50] border-t border-[#ffa500]/20 shadow-lg animate-fade-in-down">
+          <div className="md:hidden bg-[#0f1729] border-t border-[#000000]/20 shadow-lg animate-fade-in-down">
             <ul className="flex flex-col items-center justify-center space-y-6 py-10 text-lg text-gray-100">
               {navItems.map(({ id, text }) => (
                 <li key={id}>

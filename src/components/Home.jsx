@@ -97,8 +97,8 @@ function Home() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          href="public/project/ashish2.22.pdf"
-          download="public/project/ashish2.22.pdf"
+          href="src/assets/ashish2.22.pdf"
+          download="src/assets/ashish2.22.pdf"
           className="px-8 py-3 border border-[#f0eeec] text-[#3b82f6] font-semibold rounded-md hover:bg-[#3b82f6] hover:text-black transition-all duration-300 hover:shadow-lg"
         >
           Download Resume
