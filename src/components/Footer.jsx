@@ -1,47 +1,38 @@
 import React from "react";
-import {
-  FaFacebookF,
-  FaTwitter,
-  FaInstagram,
-  FaLinkedinIn,
-  FaGithub,
-} from "react-icons/fa";
+import { FaLinkedin, FaGithub, FaEnvelope } from "react-icons/fa";
 
 function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-gradient-to-r from-[#3b82f6] to-[#000000] text-gray-100 py-10 px-6 border-t border-gray-700">
-      <div className="max-w-screen-xl mx-auto flex flex-col items-center justify-center text-center space-y-6">
-        {/* Social Links */}
-        <div className="flex space-x-6">
-          {[
-            { Icon: FaFacebookF, link: "#" },
-            { Icon: FaTwitter, link: "#" },
-            { Icon: FaInstagram, link: "#" },
-            { Icon: FaLinkedinIn, link: "#" },
-            { Icon: FaGithub, link: "#" },
-          ].map(({ Icon, link }, index) => (
-            <a
-              key={index}
-              href={link}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="p-3 rounded-full bg-[] hover:bg-[#3b82f6] transition-all duration-300 transform hover:-translate-y-1 hover:scale-110"
-            >
-              <Icon size={20} />
-            </a>
-          ))}
+    <footer className="bg-slate-900 border-t border-white/5 py-12 px-6">
+      <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
+        <div className="flex flex-col items-center md:items-start space-y-2">
+          <div className="flex items-center space-x-2">
+            <span className="text-xl font-bold text-white tracking-tighter">Ashish</span>
+            <span className="text-xl font-bold text-blue-500 tracking-tighter">.</span>
+          </div>
+          <p className="text-slate-500 text-sm">Full Stack Developer & Software Engineer</p>
         </div>
 
-        {/* Divider */}
-        <div className="w-20 border-t border-gray-300"></div>
+        <div className="flex items-center space-x-6">
+          <a href="https://github.com/ashuuu08" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
+            <FaGithub size={20} />
+          </a>
+          <a href="https://linkedin.com/in/itzashu08" target="_blank" rel="noopener noreferrer" className="text-slate-400 hover:text-white transition-colors">
+            <FaLinkedin size={20} />
+          </a>
+          <a href="mailto:rajpootashishd@gmail.com" className="text-slate-400 hover:text-white transition-colors">
+            <FaEnvelope size={20} />
+          </a>
+        </div>
 
-        {/* Text Section */}
-        <div>
-          <p className="text-sm text-gray-100 tracking-wide">
-            &copy; {new Date().getFullYear()} <span className="text-[#ffa500] font-semibold">Ashish Kumar Rathour</span>. All rights reserved.
+        <div className="text-center md:text-right">
+          <p className="text-slate-500 text-xs font-medium tracking-widest uppercase">
+            &copy; {currentYear} Ashish Rathour
           </p>
-          <p className="text-xs text-gray-200 mt-1">
-            Designed & Developed with 💻 and ❤️ by Ashish
+          <p className="text-slate-600 text-[10px] mt-1 italic">
+            Built with React, Tailwind & Passion
           </p>
         </div>
       </div>
