@@ -1,118 +1,142 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { HiBriefcase, HiLocationMarker, HiCalendar, HiChevronRight } from "react-icons/hi";
 
-const Experience = () => {
-  const experiences = [
-    {
-      company: "Botivate",
-      role: "Web Developer (Intern)",
-      duration: "Jan 2026 — Present",
-      location: "Raipur, Chhattisgarh",
-      highlights: [
-        "Maintaining and updating existing production web application, resolving bugs and implementing feature enhancements.",
-        "Designed and developed a Checklist Delegation System enabling managers to assign, track, and monitor task checklists in real time.",
-        "Built a Mail Promotion Campaign System to automate project-based email marketing with customizable templates and delivery tracking."
-      ],
-      color: "blue"
-    },
-    {
-      company: "CypherBYTE",
-      role: "Web Developer (Intern)",
-      duration: "May 2024 — Jun 2024",
-      location: "Bhopal, Madhya Pradesh",
-      highlights: [
-        "Developed 5+ responsive web interfaces using React.js, HTML5, CSS3, integrated with RESTful APIs.",
-        "Optimized component rendering, improved UI performance and delivered client projects on time in an agile team."
-      ],
-      color: "indigo"
-    }
-  ];
+const into = (i = 0) => ({
+  initial: { opacity: 0, y: 28 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.65, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] },
+});
 
+const experiences = [
+  {
+    company: "Botivate",
+    logo: "🤖",
+    role: "Web Developer Intern",
+    status: "Current",
+    duration: "Jan 2026 — Present",
+    location: "Raipur, Chhattisgarh",
+    c: "#FFDE59", cl: "#FFFBDD",
+    highlights: [
+      "Maintained production Node.js + React web app — resolved 30+ bugs, reducing issues by 40%.",
+      "Architected a Checklist Delegation System with real-time monitoring, WhatsApp API notifications for 3+ manager roles.",
+      "Built Mail Promotion Campaign System with 10+ email templates, audience segmentation and analytics — cut manual effort 60%.",
+    ],
+    tech: ["Node.js", "React.js", "Supabase", "PostgreSQL", "REST APIs"],
+  },
+  {
+    company: "CypherBYTE",
+    logo: "💻",
+    role: "Web Developer Intern",
+    status: "Completed",
+    duration: "May 2024 — Jun 2024",
+    location: "Bhopal, Madhya Pradesh",
+    c: "#FF6B9D", cl: "#FFF0F5",
+    highlights: [
+      "Developed 5+ responsive React.js interfaces integrated with RESTful APIs with 100% on-time delivery.",
+      "Optimized React component rendering — 25% improvement in page load performance.",
+      "Integrated Razorpay payment gateway for secure transaction handling.",
+    ],
+    tech: ["React.js", "JavaScript", "HTML5", "CSS3", "REST APIs", "Git"],
+  },
+];
+
+export default function Experience() {
   return (
-    <section
-      name="Experience"
-      className="max-w-7xl mx-auto px-6 md:px-12 py-24"
-    >
-      <div className="space-y-16">
-        <div className="space-y-4">
-          <motion.h2
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="section-title"
-          >
-            Professional Experience
-          </motion.h2>
-          <p className="text-slate-500 max-w-2xl">
-            My professional journey as a developer, focusing on high-impact internships and production-level development.
+    <section id="experience" className="sec-alt">
+      <div className="wrap">
+        <motion.div {...into(0)} className="mb-14">
+          <p className="badge">💼 CAREER</p>
+          <h2 className="h-lg">Work <span className="hy">Experience</span></h2>
+          <p className="text-gray-500 max-w-xl">
+            Production systems, real teams, measurable impact — internships that count.
           </p>
-        </div>
+        </motion.div>
 
-        <div className="space-y-12">
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 }}
-              className="relative group lg:grid lg:grid-cols-12 gap-8 items-start"
-            >
-              {/* Timeline Indicator */}
-              <div className="hidden lg:block lg:col-span-2 py-4">
-                <div className="flex flex-col items-end text-right space-y-1">
-                  <span className="text-xs font-bold text-slate-500 uppercase tracking-widest">{exp.duration}</span>
-                  <span className="text-[10px] text-slate-600 font-medium italic">{exp.location}</span>
-                </div>
-              </div>
+        {/* timeline */}
+        <div className="relative max-w-4xl mx-auto space-y-10">
+          {/* line */}
+          <div className="hidden md:block absolute left-8 top-0 bottom-0 w-0.5 rounded-full"
+            style={{ background: "linear-gradient(to bottom, #FFDE59, #FF6B9D, #3DD6A3)" }} />
 
-              {/* Card */}
-              <div className="lg:col-span-10 glass-card p-8 md:p-10 rounded-3xl relative overflow-hidden group-hover:border-blue-500/30 transition-all duration-500">
-                <div className={`absolute top-0 left-0 w-1.5 h-full bg-${exp.color}-500 group-hover:w-2 transition-all`}></div>
+          {experiences.map((exp, i) => (
+            <motion.div key={i} {...into(i * 0.15)}
+              className="relative md:pl-24">
 
-                <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
-                  <div className="space-y-1">
-                    <h3 className="text-2xl font-bold text-white group-hover:text-blue-500 transition-colors">
+              {/* timeline dot */}
+              <motion.div
+                initial={{ scale: 0 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.2, type: "spring", stiffness: 300 }}
+                className="hidden md:flex absolute left-0 top-6 w-16 h-16 rounded-3xl items-center justify-center text-2xl shadow-lg z-10"
+                style={{ background: exp.cl, border: `2px solid ${exp.c}` }}>
+                {exp.logo}
+              </motion.div>
+
+              {/* card */}
+              <motion.div
+                whileHover={{ x: 4 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className="card p-7">
+
+                {/* header */}
+                <div className="flex items-start justify-between gap-4 mb-5 flex-wrap">
+                  <div>
+                    <span className="inline-block px-3 py-1 rounded-full text-xs font-bold mb-2"
+                      style={{ background: exp.cl, color: exp.c === "#FFDE59" ? "#C49A00" : "#E0507F" }}>
+                      {exp.status}
+                    </span>
+                    <h3 className="text-xl font-bold text-gray-900" style={{ fontFamily: "Syne,sans-serif" }}>
                       {exp.role}
                     </h3>
-                    <div className="flex items-center gap-2 text-slate-400 font-medium">
-                      <FaBriefcase className="text-blue-500" />
-                      <span>{exp.company}</span>
+                    <div className="flex items-center gap-2 mt-1 font-semibold text-gray-700">
+                      <HiBriefcase size={14} style={{ color: exp.c === "#FFDE59" ? "#C49A00" : "#E0507F" }} />
+                      {exp.company}
                     </div>
                   </div>
-
-                  <div className="lg:hidden flex flex-col space-y-2 text-slate-500 text-sm">
-                    <div className="flex items-center gap-2">
-                      <FaCalendarAlt />
-                      <span>{exp.duration}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <FaMapMarkerAlt />
-                      <span>{exp.location}</span>
-                    </div>
+                  {/* mobile logo */}
+                  <div className="md:hidden w-12 h-12 rounded-2xl flex items-center justify-center text-xl"
+                    style={{ background: exp.cl }}>
+                    {exp.logo}
                   </div>
                 </div>
 
-                <ul className="space-y-4">
-                  {exp.highlights.map((highlight, i) => (
-                    <li key={i} className="flex gap-4 group/item">
-                      <span className="text-blue-500 mt-1.5 shrink-0 opacity-50 group-hover/item:opacity-100 transition-opacity">
-                        <div className="w-1.5 h-1.5 rounded-full bg-current"></div>
-                      </span>
-                      <p className="text-slate-400 leading-relaxed group-hover/item:text-slate-300 transition-colors">
-                        {highlight}
-                      </p>
+                <div className="flex flex-wrap gap-4 text-xs text-gray-400 mb-5">
+                  <span className="flex items-center gap-1.5">
+                    <HiCalendar size={13} /> {exp.duration}
+                  </span>
+                  <span className="flex items-center gap-1.5">
+                    <HiLocationMarker size={13} /> {exp.location}
+                  </span>
+                </div>
+
+                {/* highlights */}
+                <ul className="space-y-3 mb-6">
+                  {exp.highlights.map((h, j) => (
+                    <li key={j} className="flex gap-3 text-sm text-gray-600 leading-relaxed">
+                      <HiChevronRight size={16} className="shrink-0 mt-0.5"
+                        style={{ color: exp.c === "#FFDE59" ? "#C49A00" : "#E0507F" }} />
+                      {h}
                     </li>
                   ))}
                 </ul>
-              </div>
+
+                {/* tech */}
+                <div className="flex flex-wrap gap-2">
+                  {exp.tech.map((t, j) => (
+                    <span key={j} className="px-3 py-1 rounded-xl text-xs font-semibold"
+                      style={{ background: exp.cl, color: "#374151", border: `1px solid ${exp.c}` }}>
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </motion.div>
             </motion.div>
           ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default Experience;
+}

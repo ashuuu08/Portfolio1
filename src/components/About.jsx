@@ -1,168 +1,225 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaServer, FaCode, FaDatabase, FaLayerGroup, FaRobot, FaTools, FaGraduationCap } from "react-icons/fa";
+import { FaServer, FaCode, FaDatabase, FaBrain, FaTools, FaLayerGroup } from "react-icons/fa";
 
-function About() {
-  const skillCategories = [
-    {
-      title: "Backend",
-      icon: <FaServer className="text-blue-500" />,
-      skills: "Java, Spring Boot, Spring MVC, Spring Security, JWT, Hibernate, JPA, JDBC, REST APIs, Node.js",
-    },
-    {
-      title: "Frontend",
-      icon: <FaCode className="text-indigo-500" />,
-      skills: "React.js, JavaScript (ES6+), HTML5, CSS3, Responsive Design",
-    },
-    {
-      title: "Database",
-      icon: <FaDatabase className="text-cyan-500" />,
-      skills: "MySQL, PostgreSQL, Supabase, MongoDB",
-    },
-    {
-      title: "AI Tools",
-      icon: <FaRobot className="text-purple-500" />,
-      skills: "ChatGPT, GitHub Copilot, Claude AI, Cursor IDE, Gemini, Antigravity",
-    },
-    {
-      title: "Tools",
-      icon: <FaTools className="text-slate-400" />,
-      skills: "Git, GitHub, Docker, Postman, Maven, IntelliJ IDEA, VS Code",
-    },
-    {
-      title: "CS Core",
-      icon: <FaLayerGroup className="text-emerald-500" />,
-      skills: "DSA (150+ problems), OOP, Design Patterns, System Design (LLD)",
-    },
-  ];
+const into = (i = 0) => ({
+  initial: { opacity: 0, y: 28 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.65, delay: i * 0.08, ease: [0.16, 1, 0.3, 1] },
+});
 
-  const education = [
-    {
-      degree: "Bachelor of Technology (B.Tech)",
-      specialization: "Computer Science",
-      institution: "Bansal Institute of Science & Technology, Bhopal",
-      duration: "2021 — 2025",
-    },
-    {
-      degree: "10th & 12th Standard",
-      specialization: "Science",
-      institution: "Government Excellence Higher Secondary School, India",
-      duration: "2018 — 2021",
-    },
-  ];
+const skills = [
+  {
+    label: "Backend",
+    icon: <FaServer />,
+    c: "#FFDE59", cl: "#FFFBDD",
+    items: ["Java", "Spring Boot", "Node.js", "Express", "Spring MVC", "Spring Security", "Hibernate", "REST APIs"],
+  },
+  {
+    label: "Frontend",
+    icon: <FaCode />,
+    c: "#FF6B9D", cl: "#FFF0F5",
+    items: ["React.js", "JavaScript (ES6+)", "HTML5", "CSS3", "Tailwind CSS", "Responsive UI"],
+  },
+  {
+    label: "Database",
+    icon: <FaDatabase />,
+    c: "#3DD6A3", cl: "#EAFAF5",
+    items: ["MySQL", "PostgreSQL", "Supabase", "MongoDB"],
+  },
+  {
+    label: "AI Tools",
+    icon: <FaBrain />,
+    c: "#FFDE59", cl: "#FFFBDD",
+    items: ["GitHub Copilot", "ChatGPT", "Claude AI", "Cursor IDE", "Gemini"],
+  },
+  {
+    label: "Dev Tools",
+    icon: <FaTools />,
+    c: "#FF6B9D", cl: "#FFF0F5",
+    items: ["Git", "GitHub", "Docker", "Postman", "Maven", "IntelliJ", "VS Code"],
+  },
+  {
+    label: "CS Core",
+    icon: <FaLayerGroup />,
+    c: "#3DD6A3", cl: "#EAFAF5",
+    items: ["DSA (150+ problems)", "OOP", "Design Patterns", "System Design", "Microservices"],
+  },
+];
 
+const education = [
+  {
+    degree: "B.Tech — Computer Science",
+    school: "Bansal Institute of Science & Technology",
+    year: "Sep 2021 — Jul 2025",
+    c: "#FFDE59",
+  },
+  {
+    degree: "10th & 12th — Science",
+    school: "Govt. Excellence Higher Secondary School",
+    year: "2017 — 2021",
+    c: "#FF6B9D",
+  },
+];
+
+export default function About() {
   return (
-    <div
-      name="About"
-      className="max-w-7xl mx-auto px-6 md:px-12 py-24"
-    >
-      <div className="space-y-24">
-        {/* Section Header */}
-        <div className="space-y-12">
-          <motion.h2
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            className="section-title"
-          >
-            About Me
-          </motion.h2>
+    <>
+      {/* ══ ABOUT ══ */}
+      <section id="about" className="sec-alt">
+        <div className="wrap">
+          <motion.div {...into(0)} className="max-w-3xl mx-auto text-center mb-16">
+            <p className="badge">👋 ABOUT ME</p>
+            <h2 className="h-lg">
+              The <span className="hp">Developer</span> Behind the Work
+            </h2>
+            <p className="text-gray-500 text-lg leading-relaxed">
+              I'm a passionate <strong className="text-gray-800">Full Stack Developer</strong> who loves turning complex problems
+              into clean, scalable software. I build backends that don't break and frontends people love to use.
+            </p>
+          </motion.div>
 
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              <div className="space-y-4">
-                <h3 className="text-2xl font-bold text-white flex items-center gap-3">
-                  <span className="w-8 h-8 rounded-lg bg-blue-500/20 flex items-center justify-center text-blue-500 text-sm">01</span>
-                  Professional Summary
+          <div className="grid md:grid-cols-2 gap-6 items-start">
+            {/* LEFT */}
+            <motion.div {...into(0.1)} className="space-y-5">
+              {/* expertise */}
+              <div className="card p-7">
+                <h3 className="font-bold text-gray-900 mb-5 text-lg" style={{ fontFamily: "Syne, sans-serif" }}>
+                  Core Expertise
                 </h3>
-                <p className="text-slate-400 text-lg leading-relaxed">
-                  Passionate <span className="text-blue-500 font-semibold">Full Stack Developer</span> with hands-on experience building scalable, production-ready web applications.
-                  Skilled in <span className="text-white">Spring Boot, React.js, Node.js, and REST APIs</span> with strong fundamentals in System Design and DSA.
-                </p>
-                <p className="text-slate-400 text-lg leading-relaxed">
-                  I specialize in architecting efficient backends and crafting intuitive, responsive frontends. My goal is to build software that not only works perfectly but also provides a premium experience for every user.
-                </p>
+                <div className="space-y-3">
+                  {[
+                    { t: "Java, Spring Boot & Node.js — Backend", c: "#FFDE59" },
+                    { t: "React.js — Modern Frontend", c: "#FF6B9D" },
+                    { t: "REST API Design & Integration", c: "#3DD6A3" },
+                    { t: "Database — MySQL, PostgreSQL, Supabase", c: "#FFDE59" },
+                    { t: "System Design & Scalable Architecture", c: "#FF6B9D" },
+                  ].map((x, i) => (
+                    <div key={i} className="flex items-center gap-3 group">
+                      <div className="w-7 h-7 rounded-xl flex items-center justify-center text-xs font-black shrink-0 group-hover:scale-110 transition-transform"
+                        style={{ background: x.c }}>✓</div>
+                      <span className="text-gray-600 text-sm font-medium">{x.t}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
 
-              <div className="grid grid-cols-2 gap-6">
-                <div className="glass-card p-6 rounded-2xl group">
-                  <div className="text-3xl font-bold text-white group-hover:text-blue-500 transition-colors">150+</div>
-                  <div className="text-slate-500 text-xs font-bold uppercase tracking-wider">DSA Problems</div>
-                </div>
-                <div className="glass-card p-6 rounded-2xl group">
-                  <div className="text-3xl font-bold text-white group-hover:text-blue-500 transition-colors">9+</div>
-                  <div className="text-slate-500 text-xs font-bold uppercase tracking-wider">Projects Delivered</div>
+              {/* education */}
+              <div className="card p-7">
+                <h3 className="font-bold text-gray-900 mb-5 text-lg" style={{ fontFamily: "Syne, sans-serif" }}>
+                  Education
+                </h3>
+                <div className="space-y-5">
+                  {education.map((e, i) => (
+                    <div key={i} className="flex gap-4">
+                      <div className="w-3 h-3 rounded-full mt-2 shrink-0" style={{ background: e.c }} />
+                      <div>
+                        <p className="text-xs font-bold tracking-widest" style={{ color: e.c === "#FFDE59" ? "#C49A00" : "#E0507F" }}>
+                          {e.year}
+                        </p>
+                        <p className="font-bold text-gray-900 text-sm mt-0.5">{e.degree}</p>
+                        <p className="text-gray-400 text-xs mt-0.5">{e.school}</p>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              className="space-y-8"
-            >
-              <h3 className="text-2xl font-bold text-white flex items-center gap-3">
-                <span className="w-8 h-8 rounded-lg bg-indigo-500/20 flex items-center justify-center text-indigo-500 text-sm">02</span>
-                Education
-              </h3>
-              <div className="space-y-6">
-                {education.map((edu, index) => (
-                  <div key={index} className="relative pl-8 border-l border-slate-800 space-y-2 group">
-                    <div className="absolute left-[-5px] top-2 w-2.5 h-2.5 rounded-full bg-slate-800 group-hover:bg-blue-500 transition-colors"></div>
-                    <div className="text-xs font-bold text-blue-500 uppercase tracking-widest">{edu.duration}</div>
-                    <h4 className="text-lg font-bold text-white">{edu.degree}</h4>
-                    <p className="text-slate-400 text-sm">{edu.institution}</p>
-                    <p className="text-slate-500 text-xs">{edu.specialization}</p>
-                  </div>
+            {/* RIGHT */}
+            <motion.div {...into(0.2)} className="space-y-5">
+              {/* stats */}
+              <div className="grid grid-cols-2 gap-4">
+                {[
+                  { n: "10+", l: "Projects Built", c: "#FFDE59", cl: "#FFFBDD" },
+                  { n: "150+", l: "DSA Problems", c: "#FF6B9D", cl: "#FFF0F5" },
+                  { n: "2+", l: "Internships", c: "#3DD6A3", cl: "#EAFAF5" },
+                  { n: "130+", l: "GitHub Pushes", c: "#FFDE59", cl: "#FFFBDD" },
+                ].map((s, i) => (
+                  <motion.div key={i}
+                    whileHover={{ scale: 1.04, rotate: 1 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="card p-5 text-center cursor-default"
+                    style={{ border: `2px solid ${s.c}`, background: s.cl }}>
+                    <div className="text-3xl font-black" style={{ fontFamily: "Syne,sans-serif" }}>{s.n}</div>
+                    <div className="text-xs text-gray-500 font-semibold mt-1">{s.l}</div>
+                  </motion.div>
                 ))}
               </div>
+
+              {/* open to work card */}
+              <motion.div
+                whileHover={{ y: -4 }}
+                className="card p-7 relative overflow-hidden"
+                style={{ background: "linear-gradient(135deg, #FFFBDD 0%, #FFF0F5 100%)", borderColor: "#FFDE59", borderWidth: 2 }}
+              >
+                <div className="absolute -top-8 -right-8 w-28 h-28 rounded-full opacity-20" style={{ background: "#FFDE59" }} />
+                <div className="relative z-10">
+                  <div className="text-3xl mb-3">🚀</div>
+                  <h3 className="font-bold text-gray-900 text-lg mb-2" style={{ fontFamily: "Syne,sans-serif" }}>
+                    Open to Opportunities
+                  </h3>
+                  <p className="text-gray-600 text-sm leading-relaxed">
+                    Seeking <strong>Full Stack / Backend</strong> roles. Open to Remote, Hybrid, or Relocation.
+                    Freelance contracts also welcome.
+                  </p>
+                  <button
+                    onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                    className="btn btn-y mt-5 text-xs"
+                  >
+                    Let's Talk →
+                  </button>
+                </div>
+              </motion.div>
             </motion.div>
           </div>
         </div>
+      </section>
 
-        {/* Technical Skills */}
-        <div className="space-y-12">
-          <div className="space-y-4">
-            <h3 className="text-2xl font-bold text-white flex items-center gap-3">
-              <span className="w-8 h-8 rounded-lg bg-emerald-500/20 flex items-center justify-center text-emerald-500 text-sm">03</span>
-              Technical Toolkit
-            </h3>
-            <p className="text-slate-500 max-w-2xl">A comprehensive list of technologies and tools I've mastered to build modern, high-performance applications.</p>
-          </div>
+      {/* ══ SKILLS ══ */}
+      <section id="skills" className="sec">
+        <div className="wrap">
+          <motion.div {...into(0)} className="mb-14">
+            <p className="badge">🛠️ TECH STACK</p>
+            <h2 className="h-lg">
+              Skills & <span className="hm">Arsenal</span>
+            </h2>
+            <p className="text-gray-500 max-w-xl">
+              A full toolkit for building modern end-to-end systems — from REST APIs to pixel-perfect UIs.
+            </p>
+          </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {skillCategories.map((category, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 }}
-                className="glass-card p-8 rounded-2xl group relative overflow-hidden"
-              >
-                <div className="absolute top-0 right-0 w-24 h-24 bg-blue-500/5 rounded-full -mr-12 -mt-12 blur-2xl group-hover:bg-blue-500/10 transition-all"></div>
-                <div className="flex items-center space-x-4 mb-6">
-                  <div className="p-3 bg-white/5 rounded-xl group-hover:scale-110 group-hover:bg-blue-500/10 transition-all duration-300">
-                    {category.icon}
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {skills.map((cat, i) => (
+              <motion.div key={i} {...into(i * 0.07)}
+                whileHover={{ y: -6 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className="card p-6 group cursor-default">
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-11 h-11 rounded-xl flex items-center justify-center text-lg group-hover:scale-110 transition-transform duration-300"
+                    style={{ background: cat.cl }}>
+                    {cat.icon}
                   </div>
-                  <h4 className="text-lg font-bold text-white">{category.title}</h4>
+                  <h3 className="font-bold text-gray-900" style={{ fontFamily: "Syne,sans-serif" }}>{cat.label}</h3>
                 </div>
-                <p className="text-slate-400 text-sm leading-relaxed relative z-10">
-                  {category.skills}
-                </p>
+                <div className="flex flex-wrap gap-2">
+                  {cat.items.map((item, j) => (
+                    <span key={j}
+                      className="px-3 py-1.5 rounded-xl text-xs font-semibold hover:-translate-y-0.5 transition-transform cursor-default"
+                      style={{ background: cat.cl, color: "#374151", border: `1px solid ${cat.c}` }}>
+                      {item}
+                    </span>
+                  ))}
+                </div>
+                {/* accent bottom bar */}
+                <div className="mt-5 h-1 rounded-full w-0 group-hover:w-full transition-all duration-500"
+                  style={{ background: cat.c }} />
               </motion.div>
             ))}
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 }
-
-export default About;

@@ -1,182 +1,229 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt, FaReact, FaNodeJs, FaDatabase, FaCode } from "react-icons/fa";
-import { SiSpringboot, SiPostgresql, SiMysql, SiSupabase } from "react-icons/si";
+import React from "react";
+import { motion } from "framer-motion";
+import { FaGithub, FaExternalLinkAlt, FaReact, FaNodeJs, FaCode, FaServer } from "react-icons/fa";
+import { SiSpringboot, SiPostgresql, SiMysql, SiSupabase, SiTailwindcss, SiVercel } from "react-icons/si";
+import { HiOutlineArrowRight } from "react-icons/hi";
 
-// Placeholders for images - I'll use gradients or abstract shapes if images aren't available
-const ProjectCard = ({ project, index }) => {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true }}
-      transition={{ delay: index * 0.1 }}
-      className="glass-card rounded-2xl overflow-hidden group flex flex-col h-full"
-    >
-      {/* Project Image/Visual */}
-      <div className="relative h-56 overflow-hidden bg-slate-800">
-        <div className={`absolute inset-0 opacity-40 bg-gradient-to-br ${project.color}`}></div>
-        <div className="absolute inset-0 flex items-center justify-center text-6xl opacity-20 group-hover:scale-110 transition-transform duration-500">
-          {project.mainIcon}
-        </div>
+const into = (i=0) => ({
+  initial:{opacity:0,y:28},
+  whileInView:{opacity:1,y:0},
+  viewport:{once:true},
+  transition:{duration:.65,delay:i*.08,ease:[.16,1,.3,1]},
+});
 
-        {/* Hover Overlay */}
-        <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm opacity-0 group-hover:opacity-100 transition-all duration-300 flex items-center justify-center gap-4">
-          {project.code && (
-            <a href={project.code} target="_blank" rel="noopener noreferrer" className="p-3 bg-white text-slate-900 rounded-full hover:scale-110 transition-transform">
-              <FaGithub size={20} />
-            </a>
-          )}
-          {project.live && (
-            <a href={project.live} target="_blank" rel="noopener noreferrer" className="p-3 bg-blue-600 text-white rounded-full hover:scale-110 transition-transform">
-              <FaExternalLinkAlt size={20} />
-            </a>
-          )}
-        </div>
+/* ── all projects including 2 freelance ── */
+const projects = [
+  /* ── FREELANCE ── */
+  {
+    tag:"Freelance Client",
+    emoji:"💼",
+    title:"AshbitSoft",
+    sub:"IT Solutions & Custom Software Company",
+    desc:"Designed and delivered a full company website for AshbitSoft — a software consultancy serving startups, SMEs and enterprises with custom web apps, automation & digital transformation.",
+    tech:["React","Tailwind CSS","Vite","Netlify"],
+    icons:[<FaReact/>,<SiTailwindcss/>,<SiVercel/>],
+    live:"https://ashbit.in",
+    accent:"#FFDE59",
+    accentLight:"#FFFBDD",
+    freelance: true,
+  },
+  {
+    tag:"Freelance Client",
+    emoji:"🏋️",
+    title:"Ashbit Fit",
+    sub:"Health & Productivity OS",
+    desc:"Built a modern health & fitness SaaS landing page — featuring workout tracking, GPS routes, calories, sleep, mood, tasks and more. Designed for a premium fitness-tech brand.",
+    tech:["React","Tailwind CSS","Vite","Vercel"],
+    icons:[<FaReact/>,<SiTailwindcss/>,<SiVercel/>],
+    live:"https://ashbitfit.vercel.app",
+    accent:"#3DD6A3",
+    accentLight:"#EAFAF5",
+    freelance: true,
+  },
+  /* ── PERSONAL / INTERNSHIP ── */
+  {
+    tag:"Deployed",
+    emoji:"📋",
+    title:"Checklist Delegation",
+    sub:"Real-time task management platform",
+    desc:"Multi-role real-time task delegation with WhatsApp notifications, live progress tracking and Supabase real-time sync. 50% reduction in team follow-up time.",
+    tech:["Node.js","React","Supabase","PostgreSQL"],
+    icons:[<FaNodeJs/>,<FaReact/>,<SiSupabase/>,<SiPostgresql/>],
+    live:"https://checklist-delegation.netlify.app/",
+    code:"https://github.com/ashuuu08",
+    accent:"#FF6B9D",
+    accentLight:"#FFF0F5",
+  },
+  {
+    tag:"Deployed",
+    emoji:"🎓",
+    title:"Internship Platform",
+    sub:"Enrollment with Razorpay + QR certificates",
+    desc:"Secure enrollment system with Razorpay payment gateway, automated QR-verified PDF certificate generation via PDFBox, Spring Security JWT RBAC.",
+    tech:["Spring Boot","React","MySQL","Hibernate"],
+    icons:[<SiSpringboot/>,<FaReact/>,<SiMysql/>],
+    live:"https://internmaker.vercel.app/",
+    code:"https://github.com/ashuuu08/internmaker_backend",
+    accent:"#FFDE59",
+    accentLight:"#FFFBDD",
+  },
+  {
+    tag:"Deployed",
+    emoji:"📧",
+    title:"Mail Campaign OS",
+    sub:"Automated email marketing suite",
+    desc:"10+ template email marketing platform, audience segmentation, open-rate analytics & scheduling. Cut manual campaign effort by 60%.",
+    tech:["Node.js","React","Supabase","PostgreSQL"],
+    icons:[<FaNodeJs/>,<FaReact/>,<SiSupabase/>],
+    code:"https://github.com/ashuuu08",
+    accent:"#3DD6A3",
+    accentLight:"#EAFAF5",
+  },
+  {
+    tag:"Deployed",
+    emoji:"🏫",
+    title:"Academy Portal",
+    sub:"Role-based study material platform",
+    desc:"Secure study material hub with admin/student roles, subject management, file preview and download. Deployed on Vercel.",
+    tech:["React","Node.js","MySQL"],
+    icons:[<FaReact/>,<FaNodeJs/>,<SiMysql/>],
+    live:"https://gharhischool.vercel.app/",
+    code:"https://github.com/ashuuu08/gharhischool",
+    accent:"#FF6B9D",
+    accentLight:"#FFF0F5",
+  },
+  {
+    tag:"OSS",
+    emoji:"🛒",
+    title:"E-Commerce Micro",
+    sub:"Microservices shopping platform",
+    desc:"Scalable shopping architecture with microservices, product management, cart, JWT auth, and Razorpay payment integration.",
+    tech:["Spring Boot","React","JWT","Microservices"],
+    icons:[<SiSpringboot/>,<FaReact/>,<SiMysql/>],
+    code:"https://github.com/ashuuu08/shopEase-e-Commerce",
+    accent:"#FFDE59",
+    accentLight:"#FFFBDD",
+  },
+];
 
-        {project.deployed && (
-          <div className="absolute top-4 right-4 px-3 py-1 bg-emerald-500/20 backdrop-blur-md border border-emerald-500/30 rounded-full">
-            <span className="text-emerald-400 text-[10px] font-bold uppercase tracking-wider">Deployed</span>
-          </div>
+const ProjectCard = ({p, i}) => (
+  <motion.article {...into(i*.07)} className={`card card-pop group flex flex-col overflow-hidden relative ${p.freelance?"ring-2":""}`}
+    style={p.freelance?{ringColor:p.accent}:{}}>
+
+    {/* freelance star stamp */}
+    {p.freelance && (
+      <div className="absolute top-4 right-4 z-20 flex items-center gap-1 px-3 py-1 rounded-full text-xs font-black uppercase"
+        style={{background:p.accent,color:"#111827",letterSpacing:".5px"}}>
+        ⭐ Freelance
+      </div>
+    )}
+
+    {/* visual header */}
+    <div className="relative h-40 flex items-center justify-center text-7xl overflow-hidden"
+      style={{background:`linear-gradient(135deg,${p.accentLight},#fff)`}}>
+      <span className="group-hover:scale-110 transition-transform duration-500 inline-block">{p.emoji}</span>
+      {/* animated corner accent */}
+      <div className="absolute bottom-0 left-0 w-full h-0.5 opacity-50"
+        style={{background:p.accent}}/>
+    </div>
+
+    {/* body */}
+    <div className="p-6 flex flex-col flex-grow gap-4">
+      <div>
+        <span className="text-xs font-bold uppercase tracking-widest" style={{color:p.accent==="var(--y)"||p.accent==="#FFDE59"?"#C49A00":p.accent==="#3DD6A3"?"var(--mh)":"var(--ph)"}}>
+          {p.tag}
+        </span>
+        <h3 className="text-xl font-bold text-gray-900 mt-1 group-hover:text-[#0D0D0D] transition-colors leading-tight" style={{fontFamily:"Syne,sans-serif"}}>
+          {p.title}
+        </h3>
+        <p className="text-xs text-gray-400 font-medium mt-0.5">{p.sub}</p>
+      </div>
+
+      <p className="text-gray-500 text-sm leading-relaxed line-clamp-3">{p.desc}</p>
+
+      {/* tech stack */}
+      <div className="flex flex-wrap gap-1.5 mt-auto">
+        {p.tech.map((t,j)=>(
+          <span key={j} className="px-2.5 py-1 rounded-lg text-xs font-semibold"
+            style={{background:p.accentLight,color:"#374151",border:`1px solid ${p.accent}`}}>
+            {t}
+          </span>
+        ))}
+      </div>
+
+      {/* action links */}
+      <div className="flex items-center gap-3 pt-3 border-t" style={{borderColor:"var(--bdr)"}}>
+        {p.code && (
+          <a href={p.code} target="_blank" rel="noopener noreferrer"
+            className="flex items-center gap-1.5 text-xs font-semibold text-gray-400 hover:text-gray-900 transition-colors">
+            <FaGithub/> Code
+          </a>
+        )}
+        {p.live && (
+          <a href={p.live} target="_blank" rel="noopener noreferrer"
+            className="ml-auto flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-xl transition-all hover:-translate-y-0.5"
+            style={{background:p.accent,color:"#111827"}}>
+            <FaExternalLinkAlt size={10}/>
+            {p.freelance ? "Visit Site" : "Live Demo"}
+          </a>
         )}
       </div>
+    </div>
+  </motion.article>
+);
 
-      {/* Project Info */}
-      <div className="p-8 flex flex-col flex-grow space-y-4">
-        <div className="flex items-center justify-between">
-          <h3 className="text-xl font-bold text-white group-hover:text-blue-500 transition-colors">
-            {project.title}
-          </h3>
-          <div className="flex gap-2 text-slate-500">
-            {project.icons.map((icon, i) => <span key={i}>{icon}</span>)}
-          </div>
-        </div>
-
-        <p className="text-slate-400 text-sm leading-relaxed line-clamp-3">
-          {project.desc}
-        </p>
-
-        <div className="flex flex-wrap gap-2 pt-2 mt-auto">
-          {project.tech.map((t, i) => (
-            <span key={i} className="px-2.5 py-1 bg-white/5 rounded-md text-[10px] font-bold text-slate-400 uppercase tracking-wider">
-              {t}
-            </span>
-          ))}
-        </div>
-      </div>
-    </motion.div>
-  );
-};
-
-function Portfolio() {
-  const projects = [
-    {
-      title: "Checklist Delegation System",
-      desc: "Real-time task delegation platform where managers create, assign, and monitor checklists with live progress tracking. Integrated WhatsApp notifications and live sync.",
-      tech: ["Node.js", "React.js", "Supabase", "PostgreSQL"],
-      icons: [<FaNodeJs />, <FaReact />, <SiSupabase />, <SiPostgresql />],
-      mainIcon: "📋",
-      color: "from-blue-600 to-indigo-600",
-      deployed: true,
-      live: "https://checklist-delegation.netlify.app/",
-      code: "#",
-    },
-    {
-      title: "Internship Management Platform",
-      desc: "End-to-end enrollment system with Razorpay payment gateway and automated certificate generation with QR code verification via Apache PDFBox.",
-      tech: ["Spring Boot", "React.js", "MySQL", "Hibernate"],
-      icons: [<SiSpringboot />, <FaReact />, <SiMysql />],
-      mainIcon: "🎓",
-      color: "from-emerald-600 to-teal-600",
-      deployed: false,
-      code: "#",
-    },
-    {
-      title: "Mail Promotion Campaign System",
-      desc: "Full-featured email marketing platform with customizable templates, audience segmentation, scheduling, and delivery tracking analytics.",
-      tech: ["Node.js", "React.js", "Supabase", "PostgreSQL"],
-      icons: [<FaNodeJs />, <FaReact />, <SiSupabase />],
-      mainIcon: "📧",
-      color: "from-purple-600 to-blue-600",
-      deployed: true,
-      code: "#",
-    },
-    {
-      title: "Education Material App",
-      desc: "Platform for uploading and organizing study materials with subject-wise management and role-based access for students and admins.",
-      tech: ["React.js", "Node.js", "MySQL"],
-      icons: [<FaReact />, <FaNodeJs />, <SiMysql />],
-      mainIcon: "📚",
-      color: "from-orange-600 to-red-600",
-      deployed: false,
-      code: "#",
-    },
-    {
-      title: "ShopEase - E-Commerce",
-      desc: "Complete shopping platform with product management, cart system, and secure payment integration built with microservices architecture.",
-      tech: ["Spring Boot", "React", "MySQL", "JWT"],
-      icons: [<SiSpringboot />, <FaReact />, <SiMysql />],
-      mainIcon: "🛒",
-      color: "from-indigo-600 to-purple-600",
-      deployed: false,
-      code: "https://github.com/ashuuu08/shopEase-e-Commerce",
-    },
-    {
-      title: "University Portal",
-      desc: "Responsive institutional website with course management, faculty profiles, and student resource integration.",
-      tech: ["HTML5", "CSS3", "JavaScript"],
-      icons: [<FaCode />],
-      mainIcon: "🏛️",
-      color: "from-blue-400 to-cyan-500",
-      deployed: true,
-      live: "https://ptsns.netlify.app/",
-    }
-  ];
+export default function Portfolio() {
+  const freelance = projects.filter(p=>p.freelance);
+  const personal  = projects.filter(p=>!p.freelance);
 
   return (
-    <section
-      name="Projects"
-      className="max-w-7xl mx-auto px-6 md:px-12 py-24 relative"
-    >
-      <div className="space-y-16">
-        <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
-          <div className="space-y-4">
-            <motion.h2
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="section-title !mb-0"
-            >
-              Selected Projects
-            </motion.h2>
-            <p className="text-slate-500 max-w-xl">
-              A curated collection of my work, ranging from complex enterprise systems to elegant frontend experiences.
-              Each project represents a unique challenge solved with clean code.
-            </p>
+    <section id="projects" className="sec-alt">
+      <div className="wrap">
+
+        {/* header */}
+        <motion.div {...into(0)} className="mb-16">
+          <p className="badge"> 🏗️ PORTFOLIO </p>
+          <h2 className="h-lg">
+            What I've <span className="hy">Shipped</span>
+          </h2>
+          <p className="text-gray-500 max-w-xl">
+            From freelance client sites to production enterprise systems — work that ships and works.
+          </p>
+        </motion.div>
+
+        {/* ── FREELANCE HIGHLIGHT ── */}
+        <motion.div {...into(.05)} className="mb-6">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-px flex-1" style={{background:"var(--bdr)"}}/>
+            <span className="text-xs font-black uppercase tracking-widest text-gray-400">⭐ Freelance Work</span>
+            <div className="h-px flex-1" style={{background:"var(--bdr)"}}/>
           </div>
-
-          <motion.a
-            href="https://github.com/ashuuu08"
-            target="_blank"
-            rel="noopener noreferrer"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            className="text-blue-500 font-bold flex items-center gap-2 group"
-          >
-            View all on GitHub
-            <FaGithub className="group-hover:rotate-12 transition-transform" />
-          </motion.a>
+        </motion.div>
+        <div className="grid md:grid-cols-2 gap-6 mb-14">
+          {freelance.map((p,i)=><ProjectCard key={i} p={p} i={i}/>)}
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
-            <ProjectCard key={index} project={project} index={index} />
-          ))}
+        {/* ── PERSONAL PROJECTS ── */}
+        <motion.div {...into(.05)} className="mb-6">
+          <div className="flex items-center gap-3 mb-4">
+            <div className="h-px flex-1" style={{background:"var(--bdr)"}}/>
+            <span className="text-xs font-black uppercase tracking-widest text-gray-400">Personal & Internship Projects</span>
+            <div className="h-px flex-1" style={{background:"var(--bdr)"}}/>
+          </div>
+        </motion.div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {personal.map((p,i)=><ProjectCard key={i} p={p} i={i}/>)}
         </div>
+
+        {/* github CTA */}
+        <motion.div {...into(.3)} className="text-center mt-14">
+          <a href="https://github.com/ashuuu08" target="_blank" rel="noopener noreferrer"
+            className="btn btn-ghost inline-flex">
+            <FaGithub size={16}/> See All Repositories
+            <HiOutlineArrowRight/>
+          </a>
+        </motion.div>
       </div>
     </section>
   );
 }
-
-export default Portfolio;
