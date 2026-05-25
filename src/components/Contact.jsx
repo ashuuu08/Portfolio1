@@ -120,8 +120,8 @@ function ContactSection() {
             <h3 className="font-bold text-gray-900 text-lg mb-6" style={{fontFamily:"Syne,sans-serif"}}>Send a Message</h3>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
               {[
-                { name:"name",  label:"Your Name",     type:"text",  placeholder:"Ashish Rathour" },
-                { name:"email", label:"Email Address",  type:"email", placeholder:"ashish@example.com" },
+                { name:"name",  label:"Your Name",     type:"text",  placeholder:"John Doe" },
+                { name:"email", label:"Email Address",  type:"email", placeholder:"john@example.com" },
               ].map(f=>(
                 <div key={f.name}>
                   <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">{f.label}</label>
