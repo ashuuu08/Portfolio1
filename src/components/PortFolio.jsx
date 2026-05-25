@@ -4,6 +4,9 @@ import { FaGithub, FaExternalLinkAlt, FaReact, FaNodeJs, FaCode, FaServer } from
 import { SiSpringboot, SiPostgresql, SiMysql, SiSupabase, SiTailwindcss, SiVercel } from "react-icons/si";
 import { HiOutlineArrowRight } from "react-icons/hi";
 
+import checklistImg from "../assets/checklist.png";
+import inventrymImg from "../assets/inventrym.png";
+
 const into = (i=0) => ({
   initial:{opacity:0,y:28},
   whileInView:{opacity:1,y:0},
@@ -17,42 +20,66 @@ const projects = [
   {
     tag:"Freelance Client",
     emoji:"💼",
-    title:"AshbitSoft",
-    sub:"IT Solutions & Custom Software Company",
-    desc:"Designed and delivered a full company website for AshbitSoft — a software consultancy serving startups, SMEs and enterprises with custom web apps, automation & digital transformation.",
-    tech:["React","Tailwind CSS","Vite","Netlify"],
-    icons:[<FaReact/>,<SiTailwindcss/>,<SiVercel/>],
-    live:"https://ashbit.in",
+    title:"Amigo Associate",
+    sub:"Professional Services",
+    desc:"Developed a complete web platform for Amigo Associate using the MERN stack (MongoDB, Express, React, Node.js), delivering a fast, responsive, and robust experience.",
+    tech:["MongoDB","Express.js","React","Node.js"],
+    icons:[<FaReact/>,<FaNodeJs/>],
+    live:"https://www.amigoassociate.com/",
     accent:"#FFDE59",
     accentLight:"#FFFBDD",
     freelance: true,
   },
   {
     tag:"Freelance Client",
-    emoji:"🏋️",
-    title:"Ashbit Fit",
-    sub:"Health & Productivity OS",
-    desc:"Built a modern health & fitness SaaS landing page — featuring workout tracking, GPS routes, calories, sleep, mood, tasks and more. Designed for a premium fitness-tech brand.",
-    tech:["React","Tailwind CSS","Vite","Vercel"],
-    icons:[<FaReact/>,<SiTailwindcss/>,<SiVercel/>],
-    live:"https://ashbitfit.vercel.app",
+    emoji:"🚀",
+    title:"Vaidure",
+    sub:"Modern Web Application",
+    desc:"Built a dynamic full-stack website for Vaidure leveraging the MERN stack. Designed for scalability and high performance to support business goals.",
+    tech:["MongoDB","Express.js","React","Node.js"],
+    icons:[<FaReact/>,<FaNodeJs/>],
+    live:"https://www.vaidure.com/",
     accent:"#3DD6A3",
     accentLight:"#EAFAF5",
     freelance: true,
   },
+  {
+    tag:"Freelance Client",
+    emoji:"💻",
+    title:"AshbitSoft",
+    sub:"IT Solutions & Custom Software Company",
+    desc:"Designed and delivered a full company website for AshbitSoft — a software consultancy serving startups, SMEs and enterprises with custom web apps, automation & digital transformation.",
+    tech:["React","Tailwind CSS","Vite","Netlify"],
+    icons:[<FaReact/>,<SiTailwindcss/>,<SiVercel/>],
+    live:"https://ashbit.in",
+    accent:"#A855F7",
+    accentLight:"#F3E8FF",
+    freelance: true,
+  },
   /* ── PERSONAL / INTERNSHIP ── */
   {
-    tag:"Deployed",
+    tag:"Company Project",
     emoji:"📋",
+    image: checklistImg,
     title:"Checklist Delegation",
     sub:"Real-time task management platform",
     desc:"Multi-role real-time task delegation with WhatsApp notifications, live progress tracking and Supabase real-time sync. 50% reduction in team follow-up time.",
     tech:["Node.js","React","Supabase","PostgreSQL"],
     icons:[<FaNodeJs/>,<FaReact/>,<SiSupabase/>,<SiPostgresql/>],
-    live:"https://checklist-delegation.netlify.app/",
-    code:"https://github.com/ashuuu08",
     accent:"#FF6B9D",
     accentLight:"#FFF0F5",
+  },
+  {
+    tag:"Company Project",
+    emoji:"📦",
+    image: inventrymImg,
+    title:"Inventrym",
+    sub:"Inventory Management System",
+    desc:"Full-stack inventory system with real-time stock alerts, barcode scanning integration, and automated low-stock notifications using Supabase and React.",
+    tech:["React","Supabase","PostgreSQL"],
+    icons:[<FaReact/>,<SiSupabase/>,<SiPostgresql/>],
+    accent:"#3DD6A3",
+    accentLight:"#EAFAF5",
   },
   {
     tag:"Deployed",
@@ -68,14 +95,13 @@ const projects = [
     accentLight:"#FFFBDD",
   },
   {
-    tag:"Deployed",
+    tag:"Company Project",
     emoji:"📧",
     title:"Mail Campaign OS",
     sub:"Automated email marketing suite",
     desc:"10+ template email marketing platform, audience segmentation, open-rate analytics & scheduling. Cut manual campaign effort by 60%.",
     tech:["Node.js","React","Supabase","PostgreSQL"],
     icons:[<FaNodeJs/>,<FaReact/>,<SiSupabase/>],
-    code:"https://github.com/ashuuu08",
     accent:"#3DD6A3",
     accentLight:"#EAFAF5",
   },
@@ -121,7 +147,11 @@ const ProjectCard = ({p, i}) => (
     {/* visual header */}
     <div className="relative h-40 flex items-center justify-center text-7xl overflow-hidden"
       style={{background:`linear-gradient(135deg,${p.accentLight},#fff)`}}>
-      <span className="group-hover:scale-110 transition-transform duration-500 inline-block">{p.emoji}</span>
+      {p.image ? (
+        <img src={p.image} alt={p.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
+      ) : (
+        <span className="group-hover:scale-110 transition-transform duration-500 inline-block">{p.emoji}</span>
+      )}
       {/* animated corner accent */}
       <div className="absolute bottom-0 left-0 w-full h-0.5 opacity-50"
         style={{background:p.accent}}/>
