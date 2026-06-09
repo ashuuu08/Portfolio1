@@ -1,55 +1,49 @@
-import React, { useEffect, useRef } from "react";
+import React from "react";
 import { motion } from "framer-motion";
-import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaFire } from "react-icons/fa";
-import { HiOutlineLightningBolt } from "react-icons/hi";
+import { FaGithub, FaLinkedin, FaEnvelope, FaPhone } from "react-icons/fa";
 import axios from "axios";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
 
-const into = (i=0) => ({
-  initial:{opacity:0,y:28},
-  whileInView:{opacity:1,y:0},
-  viewport:{once:true},
-  transition:{duration:.65,delay:i*.08,ease:[.16,1,.3,1]},
+const into = (i = 0) => ({
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] },
 });
-
-
 
 /* ══════════════════════════════════════════
    SERVICES SECTION
 ══════════════════════════════════════════ */
 const services = [
-  { e:"🏗️", t:"Full Stack Web Apps",   d:"End-to-end apps — Spring Boot backend, React frontend, deployed & monitored.", c:"#FFDE59", cl:"#FFFBDD" },
-  { e:"⚡", t:"REST API Development",   d:"Secure, documented APIs with JWT, Spring Security and OpenAPI standards.",     c:"#FF6B9D", cl:"#FFF0F5" },
-  { e:"🎨", t:"React UI Interfaces",    d:"Pixel-perfect responsive frontends with smooth animations and great UX.",       c:"#3DD6A3", cl:"#EAFAF5" },
-  { e:"🔍", t:"Bug Fixes & Optimize",   d:"Performance audits, memory leak fixing, and query optimization at scale.",     c:"#FFDE59", cl:"#FFFBDD" },
-  { e:"☁️", t:"Deployment & DevOps",    d:"Docker, CI/CD pipelines, and cloud deployment on Vercel, Netlify or AWS.",    c:"#FF6B9D", cl:"#FFF0F5" },
-  { e:"🗄️", t:"Database Architecture", d:"Schema design, indexing, migrations and query optimization for SQL/NoSQL.",   c:"#3DD6A3", cl:"#EAFAF5" },
+  { t: "Full Stack Web Apps", d: "End-to-end applications built with Spring Boot, Node.js, and React. Production-ready and monitored." },
+  { t: "REST API Development", d: "Secure, scalable APIs using JWT, Spring Security, and OpenAPI standards." },
+  { t: "Frontend Architecture", d: "Pixel-perfect responsive interfaces with React & Next.js focusing on Core Web Vitals." },
+  { t: "Performance Audits", d: "Memory leak fixing, bundle size reduction, and query optimization at scale." },
+  { t: "DevOps & Cloud", d: "Docker containerization, CI/CD pipelines, and cloud deployments on AWS/Vercel." },
+  { t: "Database Design", d: "Schema design, migrations, and indexing strategies for SQL and NoSQL databases." },
 ];
 
 function ServicesSection() {
   return (
-    <section id="services" className="sec-alt">
+    <section id="services" className="sec border-b border-gray-200">
       <div className="wrap">
-        <motion.div {...into(0)} className="mb-14">
-          <p className="badge">💡 WHAT I OFFER</p>
-          <h2 className="h-lg">Services <span className="hp">I Provide</span></h2>
-          <p className="text-gray-500 max-w-xl">
-            From idea to production — full ownership of whatever you need built.
+        <motion.div {...into(0)} className="mb-16">
+          <p className="badge">Services</p>
+          <h2 className="text-5xl md:text-6xl font-black text-black" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.03em" }}>
+            Capabilities.
+          </h2>
+          <p className="text-gray-500 max-w-xl text-lg mt-6">
+            Technical expertise delivered from system architecture to pixel-perfect deployment.
           </p>
         </motion.div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {services.map((s, i) => (
-            <motion.div key={i} {...into(i*.07)} className="card-pop card group p-7 cursor-default">
-              <div className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl mb-5 group-hover:scale-110 transition-transform duration-300"
-                style={{ background: s.cl }}>
-                {s.e}
-              </div>
-              <h3 className="font-bold text-gray-900 mb-2" style={{ fontFamily: "Syne,sans-serif" }}>{s.t}</h3>
+            <motion.div key={i} {...into(i * 0.1)} className="group p-8 border border-gray-200 bg-white hover:border-black transition-colors rounded-md relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-full h-1 bg-black transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left duration-300" />
+              <h3 className="font-bold text-black text-xl mb-3 tracking-tight" style={{ fontFamily: "var(--font-display)" }}>{s.t}</h3>
               <p className="text-gray-500 text-sm leading-relaxed">{s.d}</p>
-              <div className="mt-5 h-0.5 w-0 group-hover:w-full rounded-full transition-all duration-500"
-                style={{ background: s.c }} />
             </motion.div>
           ))}
         </div>
@@ -62,85 +56,99 @@ function ServicesSection() {
    CONTACT SECTION
 ══════════════════════════════════════════ */
 const contactLinks = [
-  { icon: <FaEnvelope size={18}/>, label:"Email",    value:"rajpootashishd@gmail.com",           href:"mailto:rajpootashishd@gmail.com",     c:"#FFDE59", cl:"#FFFBDD" },
-  { icon: <FaPhone    size={16}/>, label:"Phone",    value:"+91 9691207533",                      href:"tel:+919691207533",                   c:"#3DD6A3", cl:"#EAFAF5" },
-  { icon: <FaLinkedin size={18}/>, label:"LinkedIn", value:"linkedin.com/in/itzashu08",           href:"https://linkedin.com/in/itzashu08",   c:"#FF6B9D", cl:"#FFF0F5" },
-  { icon: <FaGithub   size={18}/>, label:"GitHub",   value:"github.com/ashuuu08",                href:"https://github.com/ashuuu08",         c:"#FFDE59", cl:"#FFFBDD" },
+  { icon: <FaEnvelope size={18} />, label: "Email", value: "rajpootashishd@gmail.com", href: "mailto:rajpootashishd@gmail.com" },
+  { icon: <FaPhone size={18} />, label: "Phone", value: "+91 9691207533", href: "tel:+919691207533" },
+  { icon: <FaLinkedin size={18} />, label: "LinkedIn", value: "linkedin.com/in/itzashu08", href: "https://linkedin.com/in/itzashu08" },
+  { icon: <FaGithub size={18} />, label: "GitHub", value: "github.com/ashuuu08", href: "https://github.com/ashuuu08" },
 ];
 
 function ContactSection() {
-  const { register, handleSubmit, reset, formState:{ errors, isSubmitting } } = useForm();
+  const { register, handleSubmit, reset, formState: { errors, isSubmitting } } = useForm();
 
   const onSubmit = async (data) => {
     try {
       await axios.post("https://getform.io/f/bwnnzkma", data);
-      toast.success("Sent! I'll get back to you soon 🎉");
+      toast.success("Message delivered.");
       reset();
     } catch {
-      toast.error("Couldn't send. Please try again.");
+      toast.error("Failed to send message.");
     }
   };
 
   return (
-    <section id="contact" className="sec">
+    <section id="contact" className="sec-alt">
       <div className="wrap">
-        <motion.div {...into(0)} className="mb-14">
-          <p className="badge">📬 CONTACT</p>
-          <h2 className="h-lg">Let's <span className="hy">Build Together</span></h2>
-          <p className="text-gray-500 max-w-xl">
-            Open to full-stack roles, freelance contracts, and interesting projects.
+        <motion.div {...into(0)} className="mb-16">
+          <p className="badge">Contact</p>
+          <h2 className="text-5xl md:text-6xl font-black text-black" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.03em" }}>
+            Get in touch.
+          </h2>
+          <p className="text-gray-500 max-w-xl text-lg mt-6">
+            Open to full-time roles, freelance contracts, and architectural consultations.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 gap-10 max-w-5xl">
-          {/* info cards */}
-          <motion.div {...into(.1)} className="space-y-3">
-            {contactLinks.map((c,i)=>(
-              <a key={i} href={c.href} target="_blank" rel="noopener noreferrer"
-                className="card flex items-center gap-4 p-5 group hover:-translate-x-1 hover:shadow-lg transition-all">
-                <div className="w-12 h-12 rounded-2xl flex items-center justify-center shrink-0 group-hover:scale-110 transition-transform"
-                  style={{background:c.cl}}>
-                  {c.icon}
-                </div>
-                <div>
-                  <p className="text-xs text-gray-400 font-bold uppercase tracking-wider">{c.label}</p>
-                  <p className="font-semibold text-gray-800 text-sm">{c.value}</p>
-                </div>
-              </a>
-            ))}
+        <div className="grid md:grid-cols-5 gap-12 max-w-6xl">
+          {/* info columns */}
+          <motion.div {...into(0.1)} className="md:col-span-2 space-y-6">
+            <div className="grid sm:grid-cols-2 md:grid-cols-1 gap-4">
+              {contactLinks.map((c, i) => (
+                <a key={i} href={c.href} target="_blank" rel="noopener noreferrer"
+                  className="flex items-center gap-5 p-4 border border-gray-200 rounded-md bg-white hover:border-black transition-colors group">
+                  <div className="text-gray-400 group-hover:text-black transition-colors">
+                    {c.icon}
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-widest text-gray-400 font-mono mb-1">{c.label}</p>
+                    <p className="font-medium text-black text-sm">{c.value}</p>
+                  </div>
+                </a>
+              ))}
+            </div>
 
-            <div className="card p-6 mt-4" style={{background:"linear-gradient(135deg,#FFFBDD,#FFF0F5)",borderColor:"#FFDE59"}}>
-              <p className="font-bold text-gray-900 mb-1">🟢 Available for Hire</p>
-              <p className="text-sm text-gray-600">Full Stack / Backend roles. Remote, Hybrid or Relocation. Freelance contracts welcome.</p>
+            <div className="p-6 border border-gray-200 bg-white rounded-md mt-6 relative overflow-hidden">
+              <div className="absolute top-0 left-0 w-1 h-full bg-black" />
+              <div className="flex items-center gap-2 mb-2">
+                <span className="relative flex h-2.5 w-2.5">
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-green-500"></span>
+                </span>
+                <p className="font-bold text-black text-sm tracking-tight" style={{ fontFamily: "var(--font-display)" }}>Available for Work</p>
+              </div>
+              <p className="text-sm text-gray-500 mt-2 leading-relaxed">Currently seeking SDE-1 and Full Stack Developer positions globally.</p>
             </div>
           </motion.div>
 
           {/* form */}
-          <motion.div {...into(.2)} className="card p-8">
-            <h3 className="font-bold text-gray-900 text-lg mb-6" style={{fontFamily:"Syne,sans-serif"}}>Send a Message</h3>
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
-              {[
-                { name:"name",  label:"Your Name",     type:"text",  placeholder:"Ashish Rathour" },
-                { name:"email", label:"Email Address",  type:"email", placeholder:"rajpootashishd@gmail.com" },
-              ].map(f=>(
-                <div key={f.name}>
-                  <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">{f.label}</label>
-                  <input {...register(f.name,{required:true})} type={f.type} placeholder={f.placeholder}
-                    className="w-full px-5 py-3.5 rounded-2xl border text-sm font-medium text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-2 transition-all bg-white"
-                    style={{borderColor:errors[f.name]?"var(--p)":"var(--bdr)"}} />
+          <motion.div {...into(0.2)} className="md:col-span-3">
+            <div className="p-8 md:p-10 border border-gray-200 bg-white rounded-md">
+              <h3 className="font-bold text-black text-2xl mb-8 tracking-tight" style={{ fontFamily: "var(--font-display)" }}>Send an Inquiry</h3>
+              <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+                <div className="grid md:grid-cols-2 gap-6">
+                  {[
+                    { name: "name", label: "Full Name", type: "text", placeholder: "John Doe" },
+                    { name: "email", label: "Email Address", type: "email", placeholder: "john@example.com" },
+                  ].map(f => (
+                    <div key={f.name}>
+                      <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest font-mono mb-3">{f.label}</label>
+                      <input {...register(f.name, { required: true })} type={f.type} placeholder={f.placeholder}
+                        className="w-full px-4 py-3 rounded-md border border-gray-200 text-sm font-medium text-black placeholder-gray-400 focus:outline-none focus:border-black transition-colors bg-gray-50 focus:bg-white"
+                        style={{ borderColor: errors[f.name] ? "red" : undefined }} />
+                    </div>
+                  ))}
                 </div>
-              ))}
-              <div>
-                <label className="block text-xs font-bold text-gray-400 uppercase tracking-wider mb-2">Message</label>
-                <textarea {...register("message",{required:true})} rows={4}
-                  placeholder="Tell me about your project or opportunity..."
-                  className="w-full px-5 py-3.5 rounded-2xl border text-sm font-medium text-gray-800 placeholder-gray-300 focus:outline-none focus:ring-2 resize-none transition-all bg-white"
-                  style={{borderColor:errors.message?"var(--p)":"var(--bdr)"}} />
-              </div>
-              <button type="submit" disabled={isSubmitting} className="btn btn-y w-full justify-center disabled:opacity-60">
-                {isSubmitting ? "Sending…" : "Send Message →"}
-              </button>
-            </form>
+                <div>
+                  <label className="block text-[11px] font-bold text-gray-500 uppercase tracking-widest font-mono mb-3">Project Details / Message</label>
+                  <textarea {...register("message", { required: true })} rows={5}
+                    placeholder="Tell me about your requirements..."
+                    className="w-full px-4 py-3 rounded-md border border-gray-200 text-sm font-medium text-black placeholder-gray-400 focus:outline-none focus:border-black transition-colors resize-none bg-gray-50 focus:bg-white"
+                    style={{ borderColor: errors.message ? "red" : undefined }} />
+                </div>
+                <button type="submit" disabled={isSubmitting} className="btn bg-black text-white hover:bg-gray-800 w-full md:w-auto px-8 py-4 disabled:opacity-50">
+                  {isSubmitting ? "Sending..." : "Submit Inquiry"}
+                </button>
+              </form>
+            </div>
           </motion.div>
         </div>
       </div>
