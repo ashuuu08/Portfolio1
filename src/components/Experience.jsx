@@ -1,138 +1,106 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { HiBriefcase, HiLocationMarker, HiCalendar, HiChevronRight } from "react-icons/hi";
 
 const into = (i = 0) => ({
-  initial: { opacity: 0, y: 28 },
+  initial: { opacity: 0, y: 20 },
   whileInView: { opacity: 1, y: 0 },
   viewport: { once: true },
-  transition: { duration: 0.65, delay: i * 0.1, ease: [0.16, 1, 0.3, 1] },
+  transition: { duration: 0.6, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] },
 });
 
 const experiences = [
   {
     company: "Botivate",
-    logo: "🤖",
-    role: "Web Developer Intern",
-    status: "Current",
+    role: "Full Stack Developer Intern",
+    status: "Present",
     duration: "Jan 2026 — Present",
     location: "Raipur, Chhattisgarh",
-    c: "#FFDE59", cl: "#FFFBDD",
     highlights: [
-      "Maintained production Node.js + React web app — resolved 30+ bugs, reducing issues by 40%.",
-      "Architected a Checklist Delegation System with real-time monitoring, WhatsApp API notifications for 3+ manager roles.",
-      "Built Mail Promotion Campaign System with 10+ email templates, audience segmentation and analytics — cut manual effort 60%.",
+      "Maintained production Node.js + React web app — resolved 30+ critical bugs, reducing overall issues by 40%.",
+      "Architected a Checklist Delegation System with real-time monitoring and WhatsApp API notifications for managerial roles.",
+      "Built a Mail Promotion Campaign System with audience segmentation and analytics — cutting manual effort by 60%.",
     ],
-    tech: ["Node.js", "React.js", "Supabase", "PostgreSQL", "REST APIs"],
+    tech: ["Node.js", "React", "Supabase", "PostgreSQL"],
   },
   {
     company: "CypherBYTE",
-    logo: "💻",
     role: "Web Developer Intern",
     status: "Completed",
     duration: "May 2024 — Jun 2024",
     location: "Bhopal, Madhya Pradesh",
-    c: "#FF6B9D", cl: "#FFF0F5",
     highlights: [
-      "Developed 5+ responsive React.js interfaces integrated with RESTful APIs with 100% on-time delivery.",
-      "Optimized React component rendering — 25% improvement in page load performance.",
-      "Integrated Razorpay payment gateway for secure transaction handling.",
+      "Developed responsive React interfaces integrated with secure RESTful APIs with 100% on-time delivery metrics.",
+      "Optimized frontend component rendering resulting in a 25% improvement in Core Web Vitals and page load times.",
+      "Integrated Razorpay payment gateway for secure transaction handling and automated receipt generation.",
     ],
-    tech: ["React.js", "JavaScript", "HTML5", "CSS3", "REST APIs", "Git"],
+    tech: ["React.js", "JavaScript", "REST APIs"],
   },
 ];
 
 export default function Experience() {
   return (
-    <section id="experience" className="sec-alt">
+    <section id="experience" className="sec bg-gray-50 border-y border-gray-200">
       <div className="wrap">
-        <motion.div {...into(0)} className="mb-14">
-          <p className="badge">💼 CAREER</p>
-          <h2 className="h-lg">Work <span className="hy">Experience</span></h2>
-          <p className="text-gray-500 max-w-xl">
-            Production systems, real teams, measurable impact — internships that count.
+        <motion.div {...into(0)} className="mb-20">
+          <p className="badge">Experience</p>
+          <h2 className="text-5xl md:text-6xl font-black text-black" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.03em" }}>
+            Career History.
+          </h2>
+          <p className="text-gray-500 max-w-xl text-lg mt-6">
+            Production systems, enterprise architecture, and measurable impact.
           </p>
         </motion.div>
 
-        {/* timeline */}
-        <div className="relative max-w-4xl mx-auto space-y-10">
-          {/* line */}
-          <div className="hidden md:block absolute left-8 top-0 bottom-0 w-0.5 rounded-full"
-            style={{ background: "linear-gradient(to bottom, #FFDE59, #FF6B9D, #3DD6A3)" }} />
-
+        <div className="max-w-5xl">
           {experiences.map((exp, i) => (
-            <motion.div key={i} {...into(i * 0.15)}
-              className="relative md:pl-24">
+            <motion.div key={i} {...into(i * 0.1)} className="relative pl-6 md:pl-0 border-l border-gray-200 md:border-none pb-16 last:pb-0">
+              
+              <div className="absolute left-[-5px] top-2 md:hidden w-2.5 h-2.5 rounded-full bg-black border-2 border-white" />
 
-              {/* timeline dot */}
-              <motion.div
-                initial={{ scale: 0 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.2, type: "spring", stiffness: 300 }}
-                className="hidden md:flex absolute left-0 top-6 w-16 h-16 rounded-3xl items-center justify-center text-2xl shadow-lg z-10"
-                style={{ background: exp.cl, border: `2px solid ${exp.c}` }}>
-                {exp.logo}
-              </motion.div>
+              <div className="flex flex-col md:flex-row gap-8 md:gap-16">
+                
+                {/* Left side timeline info */}
+                <div className="md:w-1/3 flex flex-col md:items-end text-left md:text-right relative">
+                  <div className="hidden md:block absolute right-[-32px] top-2 w-3 h-3 rounded-full bg-white border-2 border-black z-10" />
+                  <div className="hidden md:block absolute right-[-27px] top-2 bottom-[-80px] w-px bg-gray-200" />
+                  
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-gray-400 font-mono mb-2">
+                    {exp.duration}
+                  </p>
+                  <h3 className="text-2xl font-bold text-black" style={{ fontFamily: "var(--font-display)" }}>
+                    {exp.company}
+                  </h3>
+                  <p className="text-gray-500 font-medium text-sm mt-1">{exp.location}</p>
+                </div>
 
-              {/* card */}
-              <motion.div
-                whileHover={{ x: 4 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="card p-7">
-
-                {/* header */}
-                <div className="flex items-start justify-between gap-4 mb-5 flex-wrap">
-                  <div>
-                    <span className="inline-block px-3 py-1 rounded-full text-xs font-bold mb-2"
-                      style={{ background: exp.cl, color: exp.c === "#FFDE59" ? "#C49A00" : "#E0507F" }}>
+                {/* Right side content */}
+                <div className="md:w-2/3">
+                  <div className="mb-6 flex items-center gap-4">
+                    <h4 className="text-xl font-bold text-black">{exp.role}</h4>
+                    <span className="px-2 py-0.5 text-[10px] font-bold uppercase tracking-widest bg-gray-200 text-gray-700 rounded-sm font-mono">
                       {exp.status}
                     </span>
-                    <h3 className="text-xl font-bold text-gray-900" style={{ fontFamily: "Syne,sans-serif" }}>
-                      {exp.role}
-                    </h3>
-                    <div className="flex items-center gap-2 mt-1 font-semibold text-gray-700">
-                      <HiBriefcase size={14} style={{ color: exp.c === "#FFDE59" ? "#C49A00" : "#E0507F" }} />
-                      {exp.company}
-                    </div>
                   </div>
-                  {/* mobile logo */}
-                  <div className="md:hidden w-12 h-12 rounded-2xl flex items-center justify-center text-xl"
-                    style={{ background: exp.cl }}>
-                    {exp.logo}
+
+                  <ul className="space-y-4 mb-8">
+                    {exp.highlights.map((h, j) => (
+                      <li key={j} className="text-gray-600 leading-relaxed text-lg flex items-start">
+                        <span className="text-gray-300 mr-4 mt-1">—</span>
+                        <span>{h}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <div className="flex flex-wrap gap-2">
+                    {exp.tech.map((t, j) => (
+                      <span key={j} className="text-xs font-medium text-gray-500 bg-white px-2.5 py-1 rounded-sm border border-gray-200">
+                        {t}
+                      </span>
+                    ))}
                   </div>
                 </div>
 
-                <div className="flex flex-wrap gap-4 text-xs text-gray-400 mb-5">
-                  <span className="flex items-center gap-1.5">
-                    <HiCalendar size={13} /> {exp.duration}
-                  </span>
-                  <span className="flex items-center gap-1.5">
-                    <HiLocationMarker size={13} /> {exp.location}
-                  </span>
-                </div>
-
-                {/* highlights */}
-                <ul className="space-y-3 mb-6">
-                  {exp.highlights.map((h, j) => (
-                    <li key={j} className="flex gap-3 text-sm text-gray-600 leading-relaxed">
-                      <HiChevronRight size={16} className="shrink-0 mt-0.5"
-                        style={{ color: exp.c === "#FFDE59" ? "#C49A00" : "#E0507F" }} />
-                      {h}
-                    </li>
-                  ))}
-                </ul>
-
-                {/* tech */}
-                <div className="flex flex-wrap gap-2">
-                  {exp.tech.map((t, j) => (
-                    <span key={j} className="px-3 py-1 rounded-xl text-xs font-semibold"
-                      style={{ background: exp.cl, color: "#374151", border: `1px solid ${exp.c}` }}>
-                      {t}
-                    </span>
-                  ))}
-                </div>
-              </motion.div>
+              </div>
             </motion.div>
           ))}
         </div>
