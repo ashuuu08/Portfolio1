@@ -1,256 +1,217 @@
-import React from "react";
-import { motion } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt, FaReact, FaNodeJs, FaCode, FaServer } from "react-icons/fa";
-import { SiSpringboot, SiPostgresql, SiMysql, SiSupabase, SiTailwindcss, SiVercel } from "react-icons/si";
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 import { HiOutlineArrowRight } from "react-icons/hi";
 
 import checklistImg from "../assets/checklist.png";
 import inventrymImg from "../assets/inventrym.png";
 
-const into = (i=0) => ({
-  initial:{opacity:0,y:28},
-  whileInView:{opacity:1,y:0},
-  viewport:{once:true},
-  transition:{duration:.65,delay:i*.08,ease:[.16,1,.3,1]},
+const into = (i = 0) => ({
+  initial: { opacity: 0, y: 20 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true },
+  transition: { duration: 0.6, delay: i * 0.05, ease: [0.16, 1, 0.3, 1] },
 });
 
-/* ── all projects including 2 freelance ── */
 const projects = [
-  /* ── FREELANCE ── */
   {
-    tag:"Freelance Client",
-    emoji:"💼",
-    title:"Amigo Associate",
-    sub:"Professional Services",
-    desc:"Developed a complete web platform for Amigo Associate using the MERN stack (MongoDB, Express, React, Node.js), delivering a fast, responsive, and robust experience.",
-    tech:["MongoDB","Express.js","React","Node.js"],
-    icons:[<FaReact/>,<FaNodeJs/>],
-    live:"https://www.amigoassociate.com/",
-    accent:"#FFDE59",
-    accentLight:"#FFFBDD",
+    tag: "Freelance",
+    title: "Amigo Associate",
+    sub: "Professional Services Platform",
+    desc: "Developed a robust full-stack web platform for Amigo Associate using MongoDB, Express, React, and Node.js. Focused on performance and responsive design.",
+    tech: ["MongoDB", "Express.js", "React", "Node.js"],
+    live: "https://www.amigoassociate.com/",
     freelance: true,
   },
   {
-    tag:"Freelance Client",
-    emoji:"🚀",
-    title:"Vaidure",
-    sub:"Modern Web Application",
-    desc:"Built a dynamic full-stack website for Vaidure leveraging the MERN stack. Designed for scalability and high performance to support business goals.",
-    tech:["MongoDB","Express.js","React","Node.js"],
-    icons:[<FaReact/>,<FaNodeJs/>],
-    live:"https://www.vaidure.com/",
-    accent:"#3DD6A3",
-    accentLight:"#EAFAF5",
+    tag: "Freelance",
+    title: "Vaidure",
+    sub: "Modern Web Application",
+    desc: "Built a dynamic MERN stack application for Vaidure. Designed for scalability and high performance to support rapid business scaling.",
+    tech: ["MongoDB", "Express.js", "React", "Node.js"],
+    live: "https://www.vaidure.com/",
     freelance: true,
   },
   {
-    tag:"Freelance Client",
-    emoji:"💻",
-    title:"AshbitSoft",
-    sub:"IT Solutions & Custom Software Company",
-    desc:"Designed and delivered a full company website for AshbitSoft — a software consultancy serving startups, SMEs and enterprises with custom web apps, automation & digital transformation.",
-    tech:["React","Tailwind CSS","Vite","Netlify"],
-    icons:[<FaReact/>,<SiTailwindcss/>,<SiVercel/>],
-    live:"https://ashbit.in",
-    accent:"#A855F7",
-    accentLight:"#F3E8FF",
+    tag: "Freelance",
+    title: "AshbitSoft",
+    sub: "IT Solutions Company Site",
+    desc: "Engineered the official website for AshbitSoft consultancy. Built with React and Tailwind for blazing fast load times and clean UI.",
+    tech: ["React", "Tailwind CSS", "Vite", "Netlify"],
+    live: "https://ashbit.in",
     freelance: true,
   },
-  /* ── PERSONAL / INTERNSHIP ── */
   {
-    tag:"Company Project",
-    emoji:"📋",
+    tag: "Backend API",
+    title: "NGO Management",
+    sub: "Finance & Auth System",
+    desc: "Secure backend architecture for NGO management. Features Spring Security with JWT authentication and an embedded H2 database for robust data handling and API testing via Postman.",
+    tech: ["Java", "Spring Boot", "Spring Security", "JWT", "H2 Database", "Postman"],
+    code: "https://github.com/ashuuu08/ngo_finance.git",
+  },
+  {
+    tag: "SaaS",
     image: checklistImg,
-    title:"Checklist Delegation",
-    sub:"Real-time task management platform",
-    desc:"Multi-role real-time task delegation with WhatsApp notifications, live progress tracking and Supabase real-time sync. 50% reduction in team follow-up time.",
-    tech:["Node.js","React","Supabase","PostgreSQL"],
-    icons:[<FaNodeJs/>,<FaReact/>,<SiSupabase/>,<SiPostgresql/>],
-    accent:"#FF6B9D",
-    accentLight:"#FFF0F5",
+    title: "Checklist Delegation",
+    sub: "Real-time task management",
+    desc: "Real-time task delegation with WhatsApp notifications, live progress tracking and Supabase real-time sync. Reduced team follow-up time by 50%.",
+    tech: ["Node.js", "React", "Supabase", "PostgreSQL"],
   },
   {
-    tag:"Company Project",
-    emoji:"📦",
+    tag: "Enterprise",
     image: inventrymImg,
-    title:"Inventrym",
-    sub:"Inventory Management System",
-    desc:"Full-stack inventory system with real-time stock alerts, barcode scanning integration, and automated low-stock notifications using Supabase and React.",
-    tech:["React","Supabase","PostgreSQL"],
-    icons:[<FaReact/>,<SiSupabase/>,<SiPostgresql/>],
-    accent:"#3DD6A3",
-    accentLight:"#EAFAF5",
+    title: "Inventrym",
+    sub: "Inventory Management System",
+    desc: "Full-stack inventory system with real-time stock alerts, barcode scanning, and automated notifications.",
+    tech: ["React", "Supabase", "PostgreSQL"],
   },
   {
-    tag:"Deployed",
-    emoji:"🎓",
-    title:"Internship Platform",
-    sub:"Enrollment with Razorpay + QR certificates",
-    desc:"Secure enrollment system with Razorpay payment gateway, automated QR-verified PDF certificate generation via PDFBox, Spring Security JWT RBAC.",
-    tech:["Spring Boot","React","MySQL","Hibernate"],
-    icons:[<SiSpringboot/>,<FaReact/>,<SiMysql/>],
-    live:"https://internmaker.vercel.app/",
-    code:"https://github.com/ashuuu08/internmaker_backend",
-    accent:"#FFDE59",
-    accentLight:"#FFFBDD",
+    tag: "Deployed",
+    title: "Internship Platform",
+    sub: "Enrollment & QR certificates",
+    desc: "Secure enrollment system with Razorpay integration and automated QR-verified PDF certificate generation via Spring Boot.",
+    tech: ["Spring Boot", "React", "MySQL", "Hibernate"],
+    live: "https://internmaker.vercel.app/",
+    code: "https://github.com/ashuuu08/internmaker_backend",
   },
   {
-    tag:"Company Project",
-    emoji:"📧",
-    title:"Mail Campaign OS",
-    sub:"Automated email marketing suite",
-    desc:"10+ template email marketing platform, audience segmentation, open-rate analytics & scheduling. Cut manual campaign effort by 60%.",
-    tech:["Node.js","React","Supabase","PostgreSQL"],
-    icons:[<FaNodeJs/>,<FaReact/>,<SiSupabase/>],
-    accent:"#3DD6A3",
-    accentLight:"#EAFAF5",
+    tag: "Tool",
+    title: "Mail Campaign OS",
+    sub: "Automated marketing suite",
+    desc: "Email marketing platform with audience segmentation and open-rate analytics. Cut manual campaign effort by 60%.",
+    tech: ["Node.js", "React", "Supabase", "PostgreSQL"],
   },
   {
-    tag:"Deployed",
-    emoji:"🏫",
-    title:"Academy Portal",
-    sub:"Role-based study material platform",
-    desc:"Secure study material hub with admin/student roles, subject management, file preview and download. Deployed on Vercel.",
-    tech:["React","Node.js","MySQL"],
-    icons:[<FaReact/>,<FaNodeJs/>,<SiMysql/>],
-    live:"https://gharhischool.vercel.app/",
-    code:"https://github.com/ashuuu08/gharhischool",
-    accent:"#FF6B9D",
-    accentLight:"#FFF0F5",
+    tag: "Deployed",
+    title: "Academy Portal",
+    sub: "Role-based study platform",
+    desc: "Secure hub with admin/student roles, subject management, and file preview. Deployed on Vercel.",
+    tech: ["React", "Node.js", "MySQL"],
+    live: "https://gharhischool.vercel.app/",
+    code: "https://github.com/ashuuu08/gharhischool",
   },
   {
-    tag:"OSS",
-    emoji:"🛒",
-    title:"E-Commerce Micro",
-    sub:"Microservices shopping platform",
-    desc:"Scalable shopping architecture with microservices, product management, cart, JWT auth, and Razorpay payment integration.",
-    tech:["Spring Boot","React","JWT","Microservices"],
-    icons:[<SiSpringboot/>,<FaReact/>,<SiMysql/>],
-    code:"https://github.com/ashuuu08/shopEase-e-Commerce",
-    accent:"#FFDE59",
-    accentLight:"#FFFBDD",
+    tag: "OSS",
+    title: "E-Commerce Micro",
+    sub: "Microservices architecture",
+    desc: "Scalable shopping architecture featuring microservices, JWT auth, and Razorpay payment integration.",
+    tech: ["Spring Boot", "React", "Microservices"],
+    code: "https://github.com/ashuuu08/shopEase-e-Commerce",
   },
 ];
 
-const ProjectCard = ({p, i}) => (
-  <motion.article {...into(i*.07)} className={`card card-pop group flex flex-col overflow-hidden relative ${p.freelance?"ring-2":""}`}
-    style={p.freelance?{ringColor:p.accent}:{}}>
-
-    {/* freelance star stamp */}
-    {p.freelance && (
-      <div className="absolute top-4 right-4 z-20 flex items-center gap-1 px-3 py-1 rounded-full text-xs font-black uppercase"
-        style={{background:p.accent,color:"#111827",letterSpacing:".5px"}}>
-        ⭐ Freelance
-      </div>
-    )}
-
-    {/* visual header */}
-    <div className="relative h-40 flex items-center justify-center text-7xl overflow-hidden"
-      style={{background:`linear-gradient(135deg,${p.accentLight},#fff)`}}>
-      {p.image ? (
-        <img src={p.image} alt={p.title} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" />
-      ) : (
-        <span className="group-hover:scale-110 transition-transform duration-500 inline-block">{p.emoji}</span>
-      )}
-      {/* animated corner accent */}
-      <div className="absolute bottom-0 left-0 w-full h-0.5 opacity-50"
-        style={{background:p.accent}}/>
-    </div>
-
-    {/* body */}
-    <div className="p-6 flex flex-col flex-grow gap-4">
-      <div>
-        <span className="text-xs font-bold uppercase tracking-widest" style={{color:p.accent==="var(--y)"||p.accent==="#FFDE59"?"#C49A00":p.accent==="#3DD6A3"?"var(--mh)":"var(--ph)"}}>
-          {p.tag}
-        </span>
-        <h3 className="text-xl font-bold text-gray-900 mt-1 group-hover:text-[#0D0D0D] transition-colors leading-tight" style={{fontFamily:"Syne,sans-serif"}}>
-          {p.title}
-        </h3>
-        <p className="text-xs text-gray-400 font-medium mt-0.5">{p.sub}</p>
-      </div>
-
-      <p className="text-gray-500 text-sm leading-relaxed line-clamp-3">{p.desc}</p>
-
-      {/* tech stack */}
-      <div className="flex flex-wrap gap-1.5 mt-auto">
-        {p.tech.map((t,j)=>(
-          <span key={j} className="px-2.5 py-1 rounded-lg text-xs font-semibold"
-            style={{background:p.accentLight,color:"#374151",border:`1px solid ${p.accent}`}}>
-            {t}
+const ProjectAccordion = ({ p, i, isOpen, toggleOpen }) => {
+  return (
+    <motion.div {...into(i * 0.05)} className="border-b border-gray-200">
+      <button 
+        onClick={toggleOpen}
+        className="w-full flex flex-col md:flex-row md:items-center justify-between py-8 text-left hover:bg-gray-50 transition-colors px-4 -mx-4 group"
+      >
+        <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-8 mb-4 md:mb-0">
+          <span className="text-gray-300 font-mono text-sm group-hover:text-black transition-colors">
+            {String(i + 1).padStart(2, '0')}
           </span>
-        ))}
-      </div>
+          <h3 className="text-3xl md:text-5xl font-black text-black group-hover:text-gray-600 transition-colors" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}>
+            {p.title}
+          </h3>
+        </div>
+        <div className="flex items-center justify-between md:justify-end w-full md:w-auto gap-6">
+           {p.freelance && <span className="px-3 py-1 text-[10px] font-bold uppercase tracking-widest bg-gray-100 text-gray-600 rounded-sm font-mono">Freelance</span>}
+           <span className={`text-2xl font-light transition-transform duration-300 text-gray-400 group-hover:text-black ${isOpen ? "rotate-45" : ""}`}>
+             +
+           </span>
+        </div>
+      </button>
 
-      {/* action links */}
-      <div className="flex items-center gap-3 pt-3 border-t" style={{borderColor:"var(--bdr)"}}>
-        {p.code && (
-          <a href={p.code} target="_blank" rel="noopener noreferrer"
-            className="flex items-center gap-1.5 text-xs font-semibold text-gray-400 hover:text-gray-900 transition-colors">
-            <FaGithub/> Code
-          </a>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div 
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            className="overflow-hidden"
+          >
+            <div className="pb-10 pt-4 md:pl-16 flex flex-col lg:flex-row gap-12">
+              <div className="flex-1 space-y-8">
+                <div>
+                  <p className="text-[11px] font-bold uppercase tracking-widest text-gray-500 font-mono mb-2">{p.tag}</p>
+                  <p className="text-xl font-medium text-black">{p.sub}</p>
+                </div>
+                
+                <p className="text-gray-600 leading-relaxed text-lg max-w-xl">{p.desc}</p>
+                
+                <div className="flex flex-wrap gap-2">
+                  {p.tech.map((t, j) => (
+                    <span key={j} className="text-xs font-medium text-gray-500 bg-gray-50 px-2.5 py-1 rounded-sm border border-gray-200">
+                      {t}
+                    </span>
+                  ))}
+                </div>
+                
+                <div className="flex items-center gap-8 pt-4">
+                  {p.live && (
+                    <a href={p.live} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2 text-sm font-bold text-black border-b border-black hover:text-gray-600 hover:border-gray-600 pb-0.5 transition-colors">
+                      Live Site <FaExternalLinkAlt size={11} className="group-hover:translate-x-0.5 transition-transform" />
+                    </a>
+                  )}
+                  {p.code && (
+                    <a href={p.code} target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2 text-sm font-bold text-gray-500 hover:text-black transition-colors">
+                      Source Code <FaGithub size={14} className="group-hover:scale-110 transition-transform" />
+                    </a>
+                  )}
+                </div>
+              </div>
+              
+              {p.image && (
+                <div className="flex-1">
+                  <div className="w-full aspect-video bg-gray-100 border border-gray-200 rounded-md overflow-hidden shadow-sm">
+                    <img src={p.image} alt={p.title} className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700" />
+                  </div>
+                </div>
+              )}
+            </div>
+          </motion.div>
         )}
-        {p.live && (
-          <a href={p.live} target="_blank" rel="noopener noreferrer"
-            className="ml-auto flex items-center gap-2 text-xs font-bold px-4 py-2 rounded-xl transition-all hover:-translate-y-0.5"
-            style={{background:p.accent,color:"#111827"}}>
-            <FaExternalLinkAlt size={10}/>
-            {p.freelance ? "Visit Site" : "Live Demo"}
-          </a>
-        )}
-      </div>
-    </div>
-  </motion.article>
-);
+      </AnimatePresence>
+    </motion.div>
+  );
+};
 
 export default function Portfolio() {
-  const freelance = projects.filter(p=>p.freelance);
-  const personal  = projects.filter(p=>!p.freelance);
+  const [openIndex, setOpenIndex] = useState(0);
+
+  const toggleOpen = (index) => {
+    setOpenIndex(openIndex === index ? -1 : index);
+  };
 
   return (
-    <section id="projects" className="sec-alt">
+    <section id="projects" className="sec bg-white">
       <div className="wrap">
-
-        {/* header */}
-        <motion.div {...into(0)} className="mb-16">
-          <p className="badge"> 🏗️ PORTFOLIO </p>
-          <h2 className="h-lg">
-            What I've <span className="hy">Shipped</span>
+        <motion.div {...into(0)} className="mb-20">
+          <p className="badge">Portfolio</p>
+          <h2 className="text-5xl md:text-6xl lg:text-7xl font-black text-black" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.03em" }}>
+            Selected Works.
           </h2>
-          <p className="text-gray-500 max-w-xl">
-            From freelance client sites to production enterprise systems — work that ships and works.
+          <p className="text-gray-500 max-w-xl text-lg mt-6">
+            A showcase of production-ready applications, freelance commissions, and open-source contributions.
           </p>
         </motion.div>
 
-        {/* ── FREELANCE HIGHLIGHT ── */}
-        <motion.div {...into(.05)} className="mb-6">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px flex-1" style={{background:"var(--bdr)"}}/>
-            <span className="text-xs font-black uppercase tracking-widest text-gray-400">⭐ Freelance Work</span>
-            <div className="h-px flex-1" style={{background:"var(--bdr)"}}/>
-          </div>
-        </motion.div>
-        <div className="grid md:grid-cols-2 gap-6 mb-14">
-          {freelance.map((p,i)=><ProjectCard key={i} p={p} i={i}/>)}
+        <div className="flex flex-col border-t border-gray-200 mt-12">
+          {projects.map((p, i) => (
+            <ProjectAccordion 
+              key={i} 
+              p={p} 
+              i={i} 
+              isOpen={openIndex === i} 
+              toggleOpen={() => toggleOpen(i)} 
+            />
+          ))}
         </div>
 
-        {/* ── PERSONAL PROJECTS ── */}
-        <motion.div {...into(.05)} className="mb-6">
-          <div className="flex items-center gap-3 mb-4">
-            <div className="h-px flex-1" style={{background:"var(--bdr)"}}/>
-            <span className="text-xs font-black uppercase tracking-widest text-gray-400">Personal & Internship Projects</span>
-            <div className="h-px flex-1" style={{background:"var(--bdr)"}}/>
-          </div>
-        </motion.div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {personal.map((p,i)=><ProjectCard key={i} p={p} i={i}/>)}
-        </div>
-
-        {/* github CTA */}
-        <motion.div {...into(.3)} className="text-center mt-14">
-          <a href="https://github.com/ashuuu08" target="_blank" rel="noopener noreferrer"
-            className="btn btn-ghost inline-flex">
-            <FaGithub size={16}/> See All Repositories
-            <HiOutlineArrowRight/>
+        <motion.div {...into(0.2)} className="mt-20 flex justify-center">
+          <a href="https://github.com/ashuuu08" target="_blank" rel="noopener noreferrer" className="btn btn-ghost hover:bg-gray-50 border-gray-200 text-black">
+            View full archive on GitHub <HiOutlineArrowRight className="ml-2" />
           </a>
         </motion.div>
       </div>
