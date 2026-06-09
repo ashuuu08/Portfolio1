@@ -8,7 +8,6 @@ const navItems = [
   { id: "about",      label: "About" },
   { id: "skills",     label: "Skills" },
   { id: "projects",   label: "Projects" },
-  { id: "experience", label: "Experience" },
   { id: "services",   label: "Services" },
   { id: "contact",    label: "Contact" },
 ];
@@ -25,7 +24,6 @@ export default function Navbar() {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 40);
-      // update active section
       const ids = navItems.map(n => n.id);
       for (const id of [...ids].reverse()) {
         const el = document.getElementById(id);
@@ -37,38 +35,34 @@ export default function Navbar() {
   }, []);
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500
-      ${scrolled ? "py-3" : "py-5"}`}>
-      <div className={`mx-4 md:mx-auto md:max-w-6xl rounded-2xl px-5 flex items-center justify-between
-        transition-all duration-500 ${scrolled
-          ? "bg-white/85 backdrop-blur-xl shadow-lg shadow-black/5 border border-[#EBEBEB]"
+    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300
+      ${scrolled ? "py-2" : "py-6"}`}>
+      <div className={`mx-4 md:mx-auto md:max-w-[1200px] rounded-md px-6 flex items-center justify-between
+        transition-all duration-300 ${scrolled
+          ? "bg-white/90 backdrop-blur-md shadow-[0_2px_10px_rgba(0,0,0,0.05)] border border-gray-200"
           : "bg-transparent"}`}>
 
         {/* LOGO */}
-        <button onClick={() => scrollTo("home")} className="flex items-center gap-2.5 group py-3">
-          <motion.div
-            whileHover={{ rotate: 10, scale: 1.1 }}
-            className="w-9 h-9 rounded-xl flex items-center justify-center font-black text-sm text-gray-900"
-            style={{ background: "#FFDE59" }}>
+        <button onClick={() => scrollTo("home")} className="flex items-center gap-3 group py-3">
+          <div className="w-8 h-8 flex items-center justify-center font-bold text-sm bg-black text-white rounded-sm">
             AR
-          </motion.div>
-          <span className="text-xl font-bold text-gray-900" style={{ fontFamily: "Syne,sans-serif" }}>
-            Ashish<span style={{ color: "#FF6B9D" }}>.</span>
+          </div>
+          <span className="text-xl font-bold text-black" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}>
+            Ashish Rathour
           </span>
         </button>
 
         {/* DESKTOP NAV */}
-        <nav className="hidden md:flex items-center gap-1">
+        <nav className="hidden md:flex items-center gap-2">
           {navItems.map(({ id, label }) => (
             <button key={id} onClick={() => scrollTo(id)}
-              className={`relative px-4 py-2 text-sm font-semibold rounded-xl transition-all duration-200
-                ${active === id ? "text-gray-900" : "text-gray-400 hover:text-gray-700"}`}>
+              className={`relative px-4 py-2 text-[13px] font-semibold rounded-md transition-colors duration-200
+                ${active === id ? "text-black" : "text-gray-500 hover:text-black"}`}>
               {label}
               {active === id && (
                 <motion.div layoutId="nav-pill"
-                  className="absolute inset-0 rounded-xl -z-10"
-                  style={{ background: "#FFDE59" }}
-                  transition={{ type: "spring", stiffness: 380, damping: 30 }} />
+                  className="absolute inset-0 rounded-md bg-gray-100 -z-10"
+                  transition={{ type: "spring", stiffness: 400, damping: 30 }} />
               )}
             </button>
           ))}
@@ -77,15 +71,15 @@ export default function Navbar() {
         {/* RESUME CTA */}
         <div className="hidden md:block">
           <a href={resume} download="Ashish_Rathour_Resume.pdf"
-            className="btn btn-y text-xs py-2.5 px-5">
-            Resume ↓
+            className="btn bg-black text-white hover:bg-gray-800 text-xs py-2.5 px-6">
+            Resume 
           </a>
         </div>
 
         {/* MOBILE TOGGLE */}
         <button onClick={() => setOpen(!open)}
-          className="md:hidden p-2 rounded-xl hover:bg-gray-100 transition-colors text-gray-700 my-2">
-          {open ? <HiX size={24} /> : <HiMenu size={24} />}
+          className="md:hidden p-2 rounded-md hover:bg-gray-100 transition-colors text-black my-2">
+          {open ? <HiX size={20} /> : <HiMenu size={20} />}
         </button>
       </div>
 
@@ -93,24 +87,22 @@ export default function Navbar() {
       <AnimatePresence>
         {open && (
           <motion.div
-            initial={{ opacity: 0, scale: .96, y: -8 }}
-            animate={{ opacity: 1, scale: 1,   y: 0   }}
-            exit={{   opacity: 0, scale: .96, y: -8   }}
-            transition={{ duration: .2 }}
-            className="md:hidden absolute top-full mt-2 left-4 right-4 bg-white rounded-3xl shadow-2xl border overflow-hidden"
-            style={{ borderColor: "#EBEBEB" }}>
-            <div className="p-5 space-y-1">
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -10 }}
+            transition={{ duration: 0.2 }}
+            className="md:hidden absolute top-full mt-2 left-4 right-4 bg-white rounded-md shadow-xl border border-gray-200 overflow-hidden">
+            <div className="p-4 space-y-1">
               {navItems.map(({ id, label }) => (
                 <button key={id} onClick={() => { scrollTo(id); setOpen(false); }}
-                  className={`w-full text-left px-4 py-3 rounded-2xl font-medium transition-colors text-sm
-                    ${active === id ? "font-bold text-gray-900" : "text-gray-500 hover:bg-gray-50"}`}
-                  style={active === id ? { background: "#FFFBDD", color: "#0D0D0D" } : {}}>
+                  className={`w-full text-left px-4 py-3 rounded-md font-medium transition-colors text-sm
+                    ${active === id ? "bg-gray-50 text-black font-bold" : "text-gray-500 hover:bg-gray-50"}`}>
                   {label}
                 </button>
               ))}
-              <div className="pt-3 border-t" style={{ borderColor: "#EBEBEB" }}>
+              <div className="pt-3 mt-1 border-t border-gray-100">
                 <a href={resume} download="Ashish_Rathour_Resume.pdf"
-                  className="btn btn-y w-full justify-center text-sm">
+                  className="btn bg-black text-white hover:bg-gray-800 w-full justify-center text-sm py-3">
                   Download Resume
                 </a>
               </div>
