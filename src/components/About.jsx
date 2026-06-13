@@ -71,11 +71,10 @@ export default function About() {
               </h2>
               <div className="space-y-6 text-gray-600 text-lg leading-relaxed">
                 <p>
-                  I'm a passionate <strong className="text-black">Full Stack Developer</strong> who loves turning complex problems
-                  into clean, scalable software. I focus on building backends that don't break and frontends people love to use.
+                  I'm a results-driven <strong className="text-black">Full Stack Developer</strong> with a focus on reliability, performance, and user-centered design. I build backend systems that scale and frontends that feel snappy and intuitive.
                 </p>
                 <p>
-                  My philosophy is simple: write clean code, keep the architecture simple, and ship fast. Whether it's an enterprise Java application or a sleek React interface, I take pride in the details.
+                  I prioritize measurable outcomes: faster load times, lower error rates, and clear engineering trade-offs. I enjoy mentoring teammates, improving delivery pipelines, and shipping features end-to-end.
                 </p>
               </div>
               
@@ -126,6 +125,27 @@ export default function About() {
                       <p className="text-gray-500 mt-1">{e.school}</p>
                     </div>
                   ))}
+                </div>
+              </div>
+
+              {/* Impact */}
+              <div>
+                <h3 className="font-bold text-black mb-4 text-xl tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
+                  Impact & Highlights
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex items-start gap-4">
+                    <div className="mt-1 w-3 h-3 rounded-full bg-black" />
+                    <p className="text-gray-700">Reduced client load times by up to <strong>40%</strong> through bundling and image optimization.</p>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="mt-1 w-3 h-3 rounded-full bg-black" />
+                    <p className="text-gray-700">Built secure payment and certificate pipelines used by hundreds of students.</p>
+                  </div>
+                  <div className="flex items-start gap-4">
+                    <div className="mt-1 w-3 h-3 rounded-full bg-black" />
+                    <p className="text-gray-700">Experience delivering production systems across freelancing and enterprise contexts.</p>
+                  </div>
                 </div>
               </div>
 
