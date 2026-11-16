@@ -26,31 +26,31 @@ export default function Home() {
         <FiMousePointer className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-gray-50 w-72 h-72 md:w-96 md:h-96 rotate-45 opacity-40 -z-10" />
       </div>
 
-      <div className="relative z-10 w-full max-w-5xl mx-auto px-6 pt-32 pb-20 text-center flex flex-col items-center justify-center min-h-screen">
+      <div className="relative z-10 w-full max-w-5xl mx-auto px-4 sm:px-6 pt-28 sm:pt-32 pb-16 sm:pb-20 text-center flex flex-col items-center justify-center min-h-screen overflow-hidden">
         
         {/* Main Headline */}
-        <motion.div {...into(0.1)} className="max-w-4xl mx-auto space-y-4">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-black text-black tracking-tight" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.03em", lineHeight: 1.1 }}>
-            Engineering scalable 
+        <motion.div {...into(0.1)} className="max-w-4xl mx-auto space-y-4 w-full">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl lg:text-8xl font-black text-black tracking-tight break-words max-w-full" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.03em", lineHeight: 1.1 }}>
+            Engineering scalable{" "}
             <br className="hidden md:block" />
-            <span className="text-gray-400"> web solutions.</span>
+            <span className="text-gray-400">web solutions.</span>
           </h1>
         </motion.div>
 
         {/* Motivating Sub-headline */}
-        <motion.div {...into(0.2)} className="mt-8 max-w-2xl mx-auto">
-          <p className="text-lg md:text-xl text-gray-500 leading-relaxed font-medium">
+        <motion.div {...into(0.2)} className="mt-6 sm:mt-8 max-w-2xl mx-auto px-2">
+          <p className="text-base sm:text-lg md:text-xl text-gray-500 leading-relaxed font-medium">
             I'm{" "}
-            <strong className="text-black relative inline-block whitespace-nowrap">
+            <strong className="text-black relative inline-block whitespace-normal sm:whitespace-nowrap">
               <span className="relative z-10">Ashish Rathour</span>
-              <span className="absolute bottom-1 left-0 w-full h-3 bg-yellow-300 rounded-sm -z-10 shadow-[0_3px_12px_rgba(253,224,71,0.8)]"></span>
+              <span className="absolute bottom-1 left-0 w-full h-2.5 sm:h-3 bg-yellow-300 rounded-sm -z-10 shadow-[0_3px_12px_rgba(253,224,71,0.8)]"></span>
             </strong>
             , a Full Stack Developer driven by the challenge of turning complex problems into elegant software. I specialize in building robust backends with Java & Spring Boot, and crafting pixel-perfect interfaces with React. Let's build something remarkable.
           </p>
         </motion.div>
 
         {/* Call to Actions */}
-        <motion.div {...into(0.3)} className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md mx-auto">
+        <motion.div {...into(0.3)} className="mt-8 sm:mt-12 flex flex-col sm:flex-row items-center justify-center gap-4 w-full max-w-md mx-auto">
           <button onClick={() => document.getElementById("projects")?.scrollIntoView({ behavior: "smooth" })} className="group flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-4 bg-black text-white font-medium rounded-xl hover:bg-gray-800 transition-all shadow-[0_4px_14px_0_rgb(0,0,0,0.39)] hover:shadow-[0_6px_20px_rgba(0,0,0,0.23)] hover:-translate-y-0.5">
             View My Work <FaArrowRight size={12} className="group-hover:translate-x-1 transition-transform" />
           </button>
@@ -60,8 +60,8 @@ export default function Home() {
         </motion.div>
 
         {/* Stats Grid inside Hero */}
-        <motion.div {...into(0.5)} className="w-full max-w-4xl mx-auto mt-24 pt-12 border-t border-gray-200 bg-white/50 backdrop-blur-sm rounded-xl">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <motion.div {...into(0.5)} className="w-full max-w-4xl mx-auto mt-16 sm:mt-24 pt-8 sm:pt-12 border-t border-gray-200 bg-white/50 backdrop-blur-sm rounded-xl">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8">
             {[
               { n: "20+", l: "Projects" },
               { n: "150+", l: "DSA Solved" },
@@ -69,8 +69,8 @@ export default function Home() {
               { n: "5+", l: "Freelance" },
             ].map((s, i) => (
               <div key={i} className="flex flex-col items-center">
-                <span className="text-4xl md:text-5xl font-black text-black" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}>{s.n}</span>
-                <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-gray-400 mt-2 font-mono">{s.l}</span>
+                <span className="text-3xl sm:text-4xl md:text-5xl font-black text-black" style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}>{s.n}</span>
+                <span className="text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.15em] sm:tracking-[0.2em] text-gray-400 mt-1.5 font-mono">{s.l}</span>
               </div>
             ))}
           </div>
